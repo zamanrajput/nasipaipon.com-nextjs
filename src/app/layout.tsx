@@ -41,7 +41,7 @@ export default function RootLayout({
         <div  className={` bg-fixed h-[100vh] overflow-y-auto wallpaper absolute  w-screen`}>
           <div  className="h-[100vh] w-full overflow-y-auto absolute bg-black bg-opacity-40">
       
-          <img alt="background"  src={bgimg.src} className="w-full h-full object-cover fixed -z-10"/>
+          <img alt="background"  src={bgimg.src} className="w-full h-full bg-cover fixed -z-10"/>
     
 
 

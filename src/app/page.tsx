@@ -6,9 +6,8 @@ import sideImg from "../../assets/assets/9ac5e554-c903-41f7-b3ba-efe4af172bf2.jp
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import aboutImg from "../../assets/assets/louis-hansel-1keEJmqm8vU-unsplash.jpg";
-import welcomeImg from "../../assets/assets/welcomeImg.jpg";
 import { FaGoogle } from "react-icons/fa";
-import logo from "../../assets/assets/logo (3).png";
+import logo from "../../assets/assets/icon.png";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
@@ -33,18 +32,18 @@ const Page = () => {
   const router = useRouter();
   return (
     <div className=" flex flex-col items-center w-full justify-center overflow-x-hidden  ">
-      <div className="sm:w-[100vw] w-[90vw] h-[95vh] flex mt-20 sm:items-center justify-between">
-        <div className="sm:ms-5 text-pretty backdrop-blur-sm sm:w-[60vw] w-[90vw] rounded-xl p-5 sm:mt-0 mt-24 shadow-xl">
+      <div className="sm:w-[100vw] w-[90vw] h-[95vh] flex sm:mt-20 sm:items-center justify-center">
+        <div className="text-pretty flex flex-col items-center sm:w-[60vw] w-[90vw] rounded-xl p-5">
           <div className="relative sm:text-3xl text-3xl text-white">
-            <span className="absolute -mb-20">
-            Welcome back!
-            </span> <br />
-            <h1 className="aboutclr my-2 mb-4 sm:text-6xl text-4xl font-bold">
+           
+            <h1 className="aboutclr mt-16 sm:text-6xl text-4xl font-bold">
               <img width={400} src={logo.src} alt="" />
             </h1>
           </div>
-          <div className="sm:text-2xl text-xl text-gray-300 mt-1 ms-1 flex">
-            <div className="hidden sm:flex h-[inherit]] w-5 bg-gray-300 mx-3" />
+          <div className="sm:text-2xl text-xl text-gray-900 text-center mb-7 -mt-14">
+          Welcome to Nasi Paipon! Your Go-To Food Ordering App for Large Gatherings
+          </div>
+          <div className="sm:text-2xl text-xl text-gray-700 text-center">
             {
               "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
             }
@@ -53,18 +52,10 @@ const Page = () => {
           <button className="aboutbtn sm:mt-5 mt-6 w-[20vw]">CONTACT US</button>
         </div>
 
-        <div className="hidden sm:flex flex-1 items-center justify-end">
-          <div className="me-5 my-">
-            <img
-              className="rounded-lg w-[35vw] h-[440px] shadow-slate-40 shadow-sm "
-              src={welcomeImg.src}
-              alt="aboutImg"
-            />
-          </div>
-        </div>
+
       </div>
 
-      <div className="rev  flex flex-col w-screen sm:mt-0 mt-[-50px]">
+      <div className="rev  flex flex-col w-screen sm:mt-28">
         <div className=" flex  flex-col text-white items-center gap-12 sm:my-12">
           <h1 className="sm:text-6xl sm:font-bold text-3xl font-semibold">
             REVIEWS
