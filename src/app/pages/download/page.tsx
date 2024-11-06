@@ -3,7 +3,7 @@ import logo from "../../../../assets/assets/logo (3).png";
 import app1 from "../../../../assets/assets/app/S2.png";
 import app2 from "../../../../assets/assets/app/S1.png";
 import app3 from "../../../../assets/assets/app/S3.png";
-import app4 from "../../../../assets/assets/app/S4.png";
+import app4 from "../../../../assets/assets/app/s4.png";
 import Image from "next/image";
 
 const page = () => {
