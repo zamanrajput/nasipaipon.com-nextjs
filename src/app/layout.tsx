@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import TopNavBar from "@/components/nav";
-import { randomBgImage } from "@/config/contants";
 import bgimg from '../../assets/assets/3colorbg.png'
 
 const geistSans = localFont({
