@@ -7,42 +7,9 @@ import aboutImg from '../../../../assets/assets/louis-hansel-1keEJmqm8vU-unsplas
 const Page = () => {
   return (
     <div className='overflow-x-hidden'>
-       <div className="about flex justify-center gap-6 items-center mt-16 sm:h-screen w-screen py-10 backdrop-blur-sm text-white">
-        <div className='sm:w-[40vw] w-[90vw] sm:text-start text-start'>
-          <h1 className='text-5xl font-bold'>
-            ABOUT <span className='aboutclr'> US</span> <br />
-          </h1>
-         
-       
-          <br />
 
-
-          <h1 className='text-2xl mt-4 aboutclr font-bold'><span className="text-red-500">Nasi</span><span> Paipon</span></h1>
-            <br />
-            <p className=''>Address</p>
-            <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
-            <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
-            
-            <br />
-            
-            <p className=''>Telephone</p>
-            <a className='opacity-80' href='tel:+440141 611 2442'>0141 611 2442</a>
-            
-            <p className='mt-4'>Email</p>
-            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
-            
-        </div>
-
-        <div className='sm:block hidden w-[40vw]'>
-          <Image className='rounded-lg' width={650} src={aboutImg} alt='aboutImg' />
-        </div>
-
-      </div>
-
-      <div className="sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
-        <div className="py-16">
-          <Image src={logo} alt="logo" className="m-auto w-56 rounded-md drop-shadow-2xl" />
-        </div>
+      <div className="sm:ms-2 mt-20 sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
+    
         <div className="text-center text-5xl font-bold mb-20 text-white">About Nasi Paipon</div>
         <div className="doc">
           {
@@ -66,6 +33,36 @@ const Page = () => {
           reliable source for food in large quantities. <br />{"Experience the convenience of bulk food ordering with Nasi Paipon – simplifying catering for your special events!"}
         </div>
       </div>
+
+      <div className="about flex justify-center gap-6 items-center mt-16 sm:h-screen w-screen py-10 backdrop-blur-sm text-white">
+        <div className='sm:w-[40vw] w-[90vw] sm:text-start text-start'>
+          <h1 className='text-4xl font-bold'>
+            Address <br />
+          </h1>
+          <br />
+            <p className='text-lg'>Sales Stall</p>
+            <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='text-lg'>Central Kitchen</p>
+            <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
+            
+            <br />
+            
+            <p className=''>Telephone</p>
+            <a className='opacity-80' href='tel:+6018 274 3679'>+6018 274 3679</a>
+            <br />
+            <a className='opacity-80' href='tel:+6011 13073413'>+6011 13073413</a>
+            
+            <p className='mt-4'>Email</p>
+            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+            
+        </div>
+
+        <div className='sm:block hidden w-[40vw]'>
+          <Image className='rounded-lg' width={650} src={aboutImg} alt='aboutImg' />
+        </div>
+
+      </div>
+
 
       <div className="footer cardbg text-white flex sm:flex-row flex-col items-center w-screen justify-around py-3 sm:mt-72 mt-24">
         <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
