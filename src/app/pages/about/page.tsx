@@ -1,4 +1,3 @@
-import logo from "../../../../assets/assets/logo (3).png";
 import React from 'react'
 import Image from 'next/image'
 import aboutImg from '../../../../assets/assets/louis-hansel-1keEJmqm8vU-unsplash.jpg'

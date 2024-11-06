@@ -117,7 +117,7 @@ const Page = () => {
                 <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
               </div>
             </div>
-            <div className="text my-6 px-6">
+            <div className="text-centre my-6 px-6">
               This customer did not write a review.
             </div>
             <div className="name mt-6">
@@ -137,7 +137,7 @@ const Page = () => {
               <BiSolidStar className="" color="yellow" />
               <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
             </div>
-            <div className="text my-6 px-6">
+            <div className="text-centre my-6 px-6">
               This customer did not write a review.
             </div>
             <div className="name mt-6">
@@ -161,8 +161,8 @@ const Page = () => {
             </div>
 
             <div className="flex flex-col justify-around items-center">
-              <div className="text py-6 px-6">
-                I once saw him kill three men with a pencil in a bar{" "}
+              <div className="text-center py-6 px-6">
+              This customer did not write a review.
                 <a className="text-blue-300" title="Read More" href="#">
                   ....
                 </a>
@@ -185,7 +185,7 @@ const Page = () => {
               <BiSolidStar className="" color="yellow" />
               <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
             </div>
-            <div className="text my-6 px-6">
+            <div className="text-centre my-6 px-6">
               This customer did not write a review.
             </div>
             <div className="name mt-6">
@@ -205,7 +205,7 @@ const Page = () => {
               <BiSolidStar className="" color="yellow" />
               <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
             </div>
-            <div className="text my-6 px-6">
+            <div className="text-centre my-6 px-6">
               This customer did not write a review.
             </div>
             <div className="name mt-6">
@@ -225,7 +225,7 @@ const Page = () => {
               <BiSolidStar className="" color="yellow" />
               <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
             </div>
-            <div className="text my-6 px-6">
+            <div className="text-centre my-6 px-6">
               This customer did not write a review.
             </div>
             <div className="name mt-6">
@@ -316,7 +316,10 @@ const Page = () => {
             <br />
             <p>Address</p>
             <p className="opacity-80">
-              Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur
+              {"Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur"}
+            </p>
+            <p className="opacity-80">
+            {"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}
             </p>
 
             <br />
@@ -334,57 +337,33 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="about flex justify-center gap-6 items-center my-10 w-screen py-10 backdrop-blur-sm text-white">
-        <div className="sm:w-[40vw] w-[90vw]">
-          <h1 className="sm:text-5xl text-3xl w-[100vw] sm:font-bold sm:text-start text-center font-semibold">
-            ABOUT <span className="aboutclr"> US</span> <br />
-          </h1>
-
-          <br />
-
-          <h1 className="sm:text-2xl text-xl mt-4 aboutclr sm:font-bold font-semibold sm:text-start text-center">
-            <span className="text-red-500">Nasi</span><span> Paipon</span>
+      <div className="about flex justify-center gap-6 items-center mt-16 sm:h-screen w-screen py-10 backdrop-blur-sm text-white">
+        <div className='sm:w-[40vw] w-[90vw] sm:text-start text-start'>
+          <h1 className='text-4xl font-bold'>
+            Address <br />
           </h1>
           <br />
-          <p className="sm:text-start text-center">Address</p>
-          <p className="opacity-80 sm:text-start text-center">
-          {"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}
-          </p>
-
-          <br />
-
-          <p className="sm:text-start text-center">Telephone</p>
-          <a
-            className="opacity-80 sm:text-start text-center sm:ms-0 ms-[35vw]"
-            href="tel:+440141 611 2442"
-          >
-            0141 611 2442
-          </a>
-
-          <p className="mt-4 sm:text-start text-center">Email</p>
-          <a
-            className="opacity-80 sm:text-start text-center sm:ms-0 ms-[15vw] "
-            href="clearbusinessbyadrian@gmail.com"
-          >
-            clearbusinessbyadrian@gmail.com
-          </a>
-          <h1 className="text-lg mt-8 sm:text-start text-center">
-            OPENING HOURS
-          </h1>
-          <br />
-          <div className="flex justify-center sm:block">
-          <OpeningHoursDropdown />
-          </div>
+            <p className='text-lg'>Sales Stall</p>
+            <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='text-lg'>Central Kitchen</p>
+            <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
+            
+            <br />
+            
+            <p className=''>Telephone</p>
+            <a className='opacity-80' href='tel:+6018 274 3679'>+6018 274 3679</a>
+            <br />
+            <a className='opacity-80' href='tel:+6011 13073413'>+6011 13073413</a>
+            
+            <p className='mt-4'>Email</p>
+            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+            
         </div>
 
-        <div className=" w-[40vw]">
-          <Image
-            className="rounded-lg sm:block hidden"
-            width={650}
-            src={aboutImg}
-            alt="aboutImg"
-          />
+        <div className='sm:block hidden w-[40vw]'>
+          <Image className='rounded-lg' width={650} src={aboutImg} alt='aboutImg' />
         </div>
+
       </div>
 
       <div className="footer mt-72 cardbg text-white flex sm:flex-row flex-col w-[100vw] items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
@@ -397,10 +376,10 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-8 right-10">
+      <div className="fixed bottom-4 right-5">
         <button
         onClick={()=>router.push('/pages/download')}
-          className="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl sm:text-lg text-gray-50 bg-[#FE222E] backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-[#FFFFFF] hover:text-red-600 before:-z-10 before:aspect-square before:hover:scale-200 before:hover:duration-500 relative z-[9999] sm:px-4 px-2 sm:py-2 py-1 overflow-hidden border-2 rounded-full group"
+          className="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl sm:text-lg text-gray-50 bg-[#FE222E] backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-[#FFFFFF] hover:text-red-600 before:-z-10 before:aspect-square before:hover:scale-200 before:hover:duration-500 relative z-[9999] sm:px-4 px-3 sm:py-2 py-2 overflow-hidden border-2 rounded-full group"
           type="submit"
         >
           <span className="sm:block hidden">Order Now</span>

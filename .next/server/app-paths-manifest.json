@@ -1,7 +1,7 @@
 {
-  "/pages/about/page": "app/pages/about/page.js",
   "/pages/download/page": "app/pages/download/page.js",
   "/pages/contact/page": "app/pages/contact/page.js",
   "/pages/timing/page": "app/pages/timing/page.js",
-  "/pages/privacy/page": "app/pages/privacy/page.js"
+  "/pages/privacy/page": "app/pages/privacy/page.js",
+  "/page": "app/page.js"
 }

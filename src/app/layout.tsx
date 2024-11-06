@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Queen's Bite",
+  title: "Nasi Paipon",
   description: "The Tasty House",
 };
 
