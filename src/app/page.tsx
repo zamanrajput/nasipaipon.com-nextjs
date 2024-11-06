@@ -249,14 +249,14 @@ const Page = () => {
 
         <div className="backdrop-blur-lg sm:w-[60vw] rounded-xl p-10 shadow-xl w-[80vw]">
           <div className="text-3xl ">
-            <h1 className="aboutclr sm:mt-4 sm:text-6xl sm:font-bold text3xl font-semibold">
+            <h1 className="sm:mt-4 sm:text-6xl sm:font-bold text-3xl text-white font-semibold">
               {" "}
               Coupons
             </h1>
           </div>
           <br />
           <div className="sm:text-3xl text-2xl ms-1 flex text-white">
-            <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl brownbg mx-2" />{" "}
+            <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl bg-white mx-2" />{" "}
             Send a gift voucher to friends and family <br /> or buy it now for
             your future use.
           </div>
@@ -266,7 +266,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="sm:w-screen sm:rounded-none rounded-lg w-[80vw] backdrop-blur-sm text-white my-10">
+     {false && <div className="sm:w-screen sm:rounded-none rounded-lg w-[80vw] backdrop-blur-sm text-white my-10">
         <div className="sm:text-5xl text-3xl font-bold text-shadow-custom2 text-center my-10">
           CONTACT US
         </div>
@@ -312,31 +312,10 @@ const Page = () => {
               !
             </p>
             <br />
-            <p className="text-xl">Address</p>
-            <br />
-            <h1 className="text-lg">Sales Stall</h1>
-            <p className="opacity-80">
-              {"Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur"}
-            </p>
-            <h1 className="text-lg">Central Kitchen</h1>
-            <p className="opacity-80">
-            {"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}
-            </p>
-
-            <br />
-
-            <p className="">Telephone</p>
-            <a className="opacity-80" href="tel:+440141 611 2442">
-              0141 611 2442
-            </a>
-            <br />
-            <p className="">Email</p>
-            <a className="opacity-80" href="clearbusinessbyadrian@gmail.com">
-            contact@nasipaipon.com
-            </a>
+           
           </div>
         </div>
-      </div>
+      </div>}
 
       <div className="about flex justify-center gap-6 items-center mt-16 sm:h-screen w-screen py-10 backdrop-blur-sm text-white">
         <div className='sm:w-[40vw] w-[90vw] sm:text-start text-start'>
