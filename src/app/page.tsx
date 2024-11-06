@@ -40,10 +40,10 @@ const Page = () => {
               <img width={400} src={logo.src} alt="" />
             </h1>
           </div>
-          <div className="sm:text-2xl text-xl text-gray-900 text-center mb-7 -mt-14">
+          <div className="sm:text-2xl text-xl text-gray-200 text-center mb-7">
           Welcome to Nasi Paipon! Your Go-To Food Ordering App for Large Gatherings
           </div>
-          <div className="sm:text-2xl text-xl text-gray-700 text-center">
+          <div className="sm:text-2xl text-xl text-gray-100 text-center">
             {
               "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
             }

@@ -74,7 +74,7 @@ const TopNavBar = () => {
 
       {/* Mobile Hamburger and Side Nav */}
       <nav className="sm:hidden flex items-center justify-between px-4 backdrop-blur-sm absolute w-full z-[100]">
-        <div
+        {/* <div
           onClick={() => {
             router.push("/");
             setCIndex(0);
@@ -82,13 +82,13 @@ const TopNavBar = () => {
           className="text-2xl font-bold logoclr"
         >
           <img width={200} src={logo.src} alt="" className="mb-2" />
-        </div>
+        </div> */}
         <div
           className="cursor-pointer"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <svg
-            className="w-8 h-8 text-red-600"
+            className="w-8 h-8 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
