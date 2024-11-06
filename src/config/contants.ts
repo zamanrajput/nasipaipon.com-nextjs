@@ -10,7 +10,7 @@ import bgImg9 from "../../assets/assets/bg/9.jpg";
 import bgImg10 from "../../assets/assets/bg/10.jpg";
 import bgImg11 from "../../assets/assets/bg/11.jpg";
 
-var images = [bgImg1,
+const images = [bgImg1,
      bgImg2,
       bgImg3, bgImg4, bgImg5, bgImg6, bgImg7, bgImg8,bgImg9,bgImg10,bgImg11];
 
