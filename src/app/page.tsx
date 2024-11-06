@@ -2,8 +2,7 @@
 import React from "react";
 import { BiSolidStar } from "react-icons/bi";
 import Image from "next/image";
-import sideImg from "../../assets/assets/drumstick.jpeg";
-import OpeningHoursDropdown from "../components/dropdown";
+import sideImg from "../../assets/assets/9ac5e554-c903-41f7-b3ba-efe4af172bf2.jpeg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import aboutImg from "../../assets/assets/louis-hansel-1keEJmqm8vU-unsplash.jpg";
@@ -36,8 +35,10 @@ const Page = () => {
     <div className=" flex flex-col items-center w-full justify-center overflow-x-hidden  ">
       <div className="sm:w-[100vw] w-[90vw] h-[95vh] flex mt-20 sm:items-center justify-between">
         <div className="sm:ms-5 text-pretty backdrop-blur-sm sm:w-[60vw] w-[90vw] rounded-xl p-5 sm:mt-0 mt-24 shadow-xl">
-          <div className="sm:text-3xl text-3xl text-white">
-            Welcome back! <br />
+          <div className="relative sm:text-3xl text-3xl text-white">
+            <span className="absolute -mb-20">
+            Welcome back!
+            </span> <br />
             <h1 className="aboutclr my-2 mb-4 sm:text-6xl text-4xl font-bold">
               <img width={400} src={logo.src} alt="" />
             </h1>
@@ -235,26 +236,26 @@ const Page = () => {
         </Carousel>
       </div>
 
-      <div className="flex sm:flex-row flex-col items-center justify-center gap-10 px-24 mt-10 w-screen bg-gray-300 bg-opacity-70 py-10">
+      <div className="flex sm:flex-row flex-col items-center justify-center gap-10 px-24 mt-10 w-screen py-10">
         <div className="img rounded-xl sm:w-[30vw] w-[100vw] flex justify-center">
           <img
-            height={300}
-            width={500}
+            height={500}
+            width={600}
             className="rounded-xl sm:w-[38vw] w-[80vw] sm:h-[40vh] h-[30vh]"
             src={sideImg.src}
             alt="sideImg"
           />
         </div>
 
-        <div className="backdrop-blur-sm sm:w-[60vw] rounded-xl p-10 shadow-xl w-[80vw]">
+        <div className="backdrop-blur-lg sm:w-[60vw] rounded-xl p-10 shadow-xl w-[80vw]">
           <div className="text-3xl ">
             <h1 className="aboutclr sm:mt-4 sm:text-6xl sm:font-bold text3xl font-semibold">
               {" "}
-              GIFT VOUCHERS
+              Coupons
             </h1>
           </div>
           <br />
-          <div className="sm:text-3xl text-2xl ms-1 flex">
+          <div className="sm:text-3xl text-2xl ms-1 flex text-white">
             <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl brownbg mx-2" />{" "}
             Send a gift voucher to friends and family <br /> or buy it now for
             your future use.
@@ -311,13 +312,13 @@ const Page = () => {
               !
             </p>
             <br />
+            <p className="text-xl">Address</p>
             <br />
-            <h1 className="text-lg">Nasi Paipon</h1>
-            <br />
-            <p>Address</p>
+            <h1 className="text-lg">Sales Stall</h1>
             <p className="opacity-80">
               {"Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur"}
             </p>
+            <h1 className="text-lg">Central Kitchen</h1>
             <p className="opacity-80">
             {"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}
             </p>
@@ -331,7 +332,7 @@ const Page = () => {
             <br />
             <p className="">Email</p>
             <a className="opacity-80" href="clearbusinessbyadrian@gmail.com">
-              clearbusinessbyadrian@gmail.com
+            contact@nasipaipon.com
             </a>
           </div>
         </div>
@@ -356,7 +357,7 @@ const Page = () => {
             <a className='opacity-80' href='tel:+6011 13073413'>+6011 13073413</a>
             
             <p className='mt-4'>Email</p>
-            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">contact@nasipaipon.com</a>
             
         </div>
 
@@ -366,11 +367,38 @@ const Page = () => {
 
       </div>
 
+      <div className="sm:ms-2 mt-20 sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
+    
+    <div className="text-center text-5xl font-bold mb-20 text-white py-10">About Us</div>
+    <div className="doc">
+      {
+        "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
+      }
+      <h1 className="text-xl mt-5 mb-2 font-bold text-white">Why Choose Nasi Paipon?</h1>
+      {
+        "With Nasi Paipon, you can effortlessly order food in large quantities from a diverse range of vendors – including restaurants, caterers, food stalls, and even home-based food providers. "
+      }
+      <h1 className="text-xl mt-5 mb-2 font-bold text-white">Effortless Pickup with QR Code</h1>
+      {
+        "Although Nasi Paipon doesn’t directly offer delivery services, we make pickups a breeze. After you place an order, you’ll receive a QR code that you can show to the vendor. Once the vendor scans your QR code, they can easily view the details of your order, ensuring a quick and accurate handover. You can choose to pick up the food yourself or arrange a delivery service to collect it."
+      }
+      <h1 className="text-xl mt-5 mb-2 font-bold text-white">Unmatched Convenience for Big Events</h1>
+      {
+        "There’s no platform like Nasi Paipon in the market today for placing bulk food orders. Now you can streamline your food ordering process for large events with a few taps."
+      }
+      <h1 className="text-xl mt-5 mb-2 font-bold text-white">{"Perfect for:"}</h1>
+     <b> Anyone planning a large gathering:</b> weddings, birthdays, prayer
+      gatherings, office meals, and more. <br /> <b>Event organizers</b> who need a
+      reliable source for food in large quantities. <br />{"Experience the convenience of bulk food ordering with Nasi Paipon – simplifying catering for your special events!"}
+    </div>
+  </div>
+
+
       <div className="footer mt-72 cardbg text-white flex sm:flex-row flex-col w-[100vw] items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
         <div className=" opacity-80">
           {"Copyright © 2023 Nasi Paipon - All Rights Reserved."}
         </div>
-        <div className=" opacity-80">Privacy Policy</div>
+        <div onClick={()=>router.push('/pages/privacy')} className=" opacity-80 cursor-pointer">Privacy Policy</div>
         <div className=" opacity-80">
           Powered by Revolution Software Pakistan
         </div>

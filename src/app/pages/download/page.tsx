@@ -5,14 +5,16 @@ import app2 from "../../../../assets/assets/app/S1.png";
 import app3 from "../../../../assets/assets/app/S3.png";
 import app4 from "../../../../assets/assets/app/s4.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const router = useRouter();
   return (
     <div className="bg-opacity-30 overflow-x-hidden">
 
       <div className="flex sm:flex-row flex-col justify-around sm:ms-20 gap-6 mt-28 text-white">
         <div className="sm:w-[45vw] text-center w-[95vw] flex flex-col gap-10 sm:pt-28 pt-14">
-          <h1 className="sm:text-5xl text-4xl font-bold">Best Bulk Food provider</h1>
+          <h1 className="sm:text-4xl text-3xl text-pretty text-start font-bold">Welcome to Nasi Paipon! Your Go-To Food Ordering App for Large Gatherings</h1>
           <button
             type="button"
             className="bg-red-600 w-fit sm:px-8 px-6 rounded-md sm:py-4 py-3 mx-auto text-3xl text-white"
@@ -113,7 +115,7 @@ const page = () => {
         <div className="opacity-80">
           {"Copyright © 2023 Nasi Paipon - All Rights Reserved."}
         </div>
-        <div className="opacity-80">Privacy Policy</div>
+        <div onClick={()=>router.push('/pages/download')} className="opacity-80">Privacy Policy</div>
         <div className="opacity-80">
           Powered by Revolution Software Pakistan
         </div>

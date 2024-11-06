@@ -1,7 +1,10 @@
 'use client'
 import React from 'react'
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  
+  const router = useRouter();
   return (
     <div className='overflow-x-hidden'>
        <div className='w-screen backdrop-blur-sm text-white py-10 sm:pt-20 pt-28'>
@@ -54,7 +57,7 @@ const Page = () => {
 
 <div className="footer cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
         <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
-        <div className=' opacity-50'>Privacy Policy</div>
+        <div onClick={()=>router.push('/pages/download')} className=' opacity-50'>Privacy Policy</div>
         <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
       </div>
     </div>

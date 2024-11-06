@@ -1,15 +1,18 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import aboutImg from '../../../../assets/assets/louis-hansel-1keEJmqm8vU-unsplash.jpg'
+import { useRouter } from "next/navigation";
 
 
 const Page = () => {
+  const router = useRouter();
   return (
     <div className='overflow-x-hidden'>
 
       <div className="sm:ms-2 mt-20 sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
     
-        <div className="text-center text-5xl font-bold mb-20 text-white">About Nasi Paipon</div>
+        <div className="text-center text-5xl font-bold mb-20 text-white py-10">About Us</div>
         <div className="doc">
           {
             "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
@@ -65,7 +68,7 @@ const Page = () => {
 
       <div className="footer cardbg text-white flex sm:flex-row flex-col items-center w-screen justify-around py-3 sm:mt-72 mt-24">
         <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
-        <div className=' opacity-50'>Privacy Policy</div>
+        <div onClick={()=>router.push('/pages/download')} className=' opacity-50'>Privacy Policy</div>
         <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
       </div>
 

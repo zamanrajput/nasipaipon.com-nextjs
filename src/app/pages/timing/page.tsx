@@ -1,13 +1,16 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import timing from '../../../../assets/assets/timing.webp'
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   return (
     <div className='overflow-x-hidden'>
-       <div className="timing w-screen text-white py-10 bg-black bg-opacity-40 mt-16">
+       <div className="timing w-screen min-h-screen text-white py-10 mt-16">
 
-<h1 className='sm:text-7xl text-4xl font-bold sm:mt-0 mt-10 text-center'>TIMINGS</h1>
+<h1 className='sm:text-7xl text-4xl font-bold sm:mt-0 mt-10 text-center py-10'>TIMINGS</h1>
 <div className="about flex justify-center gap-14 items-center sm:mt-0 mt-16 my-10 w-[100vw]">
   <div className="text-center sm:text-start py-1 text-xl flex flex-col sm:gap-5 gap-10 sm:w-[500px] w-[100vw]">
     <div>
@@ -97,7 +100,7 @@ const Page = () => {
 
 <div className="footer cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
         <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
-        <div className=' opacity-50'>Privacy Policy</div>
+        <div onClick={()=>router.push('/pages/download')} className=' opacity-50'>Privacy Policy</div>
         <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
       </div>
 

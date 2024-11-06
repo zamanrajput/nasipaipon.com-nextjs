@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import logo from "../../assets/assets/logo (3).png";
+import logo from "../../assets/assets/NASI PAIPON.png";
 
 type MenuItemNav = {
   name: string;
@@ -19,6 +19,7 @@ const TopNavBar = () => {
     // { name: "MENUS", url: "/pages/menus" },
     { name: "CONTACT", url: "/pages/contact" },
     { name: "ABOUT", url: "/pages/about" },
+    { name: "PRIVACY", url: "/pages/privacy" },
   ];
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const TopNavBar = () => {
             router.push("/");
             setCIndex(0);
           }}
-          className="logo text-3xl font-extrabold logoclr cursor-pointer"
+          className="logo text-3xl font-extrabold logoclr cursor-pointer my-3"
         >
           <img width={250} src={logo.src} alt="" className="mb-2" />
         </div>
