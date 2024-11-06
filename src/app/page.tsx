@@ -335,7 +335,7 @@ const Page = () => {
       </div>
 
       <div className="about flex justify-center gap-6 items-center my-10 w-screen py-10 backdrop-blur-sm text-white">
-        <div className="sm:w-[40vw] w-[100vw]">
+        <div className="sm:w-[40vw] w-[90vw]">
           <h1 className="sm:text-5xl text-3xl w-[100vw] sm:font-bold sm:text-start text-center font-semibold">
             ABOUT <span className="aboutclr"> US</span> <br />
           </h1>
@@ -363,7 +363,7 @@ const Page = () => {
 
           <p className="mt-4 sm:text-start text-center">Email</p>
           <a
-            className="opacity-80 text-red-600 sm:text-start text-center sm:ms-0 ms-[15vw] "
+            className="opacity-80 sm:text-start text-center sm:ms-0 ms-[15vw] "
             href="clearbusinessbyadrian@gmail.com"
           >
             clearbusinessbyadrian@gmail.com
