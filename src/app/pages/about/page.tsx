@@ -12,7 +12,7 @@ const Page = () => {
 
       <div className="sm:ms-2 mt-20 sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
     
-        <div className="text-center text-5xl font-bold mb-20 text-white py-10">About Us</div>
+        <div className="text-center text-5xl text-shadow-custom2 font-bold mb-20 text-white py-10">About Us</div>
         <div className="doc">
           {
             "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
@@ -55,7 +55,7 @@ const Page = () => {
             <a className='opacity-80' href='tel:+6011 13073413'>+6011 13073413</a>
             
             <p className='mt-4'>Email</p>
-            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+            <a className='opacity-80' href="contact@nasipaipon.com">contact@nasipaipon.com</a>
             
         </div>
 

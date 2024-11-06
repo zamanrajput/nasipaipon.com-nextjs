@@ -34,20 +34,26 @@ const Page = () => {
     <h1 className='text-2xl'>SPECIAL REQUEST</h1>
     <br />
     <p className='opacity-80'>{"Do you have dietary concerns? Questions about an upcoming event? Drop us a line, and we'll get back to you soon!"}</p>
-    <br /><br />
-    <h1 className='text-lg'>Nasi Paipon</h1>
     <br />
-    <p>Address</p>
-    <p className='opacity-80'>No.2 Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
-    <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
-    
+    <br />
+    <h1 className='text-4xl font-bold'>
+            Address <br />
+          </h1>
+          <br />
+            <p className='text-lg'>Sales Stall</p>
+            <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='text-lg'>Central Kitchen</p>
+            <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
+          
     <br />
     
     <p className=''>Telephone</p>
-    <a className='opacity-80' href='tel:+440141 611 2442'>0141 611 2442</a>
+    <a className='opacity-80' href='tel:+6018 274 3679'>+6018 274 3679</a>
+    <br />
+    <a className='opacity-80' href='tel:+6011 13073413'>+6011 13073413</a>
     <br/>
     <p className=''>Email</p>
-    <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+    <a className='opacity-80' href="contact@nasipaipon.com">contact@nasipaipon.com</a>
     <br />
   </div>
 

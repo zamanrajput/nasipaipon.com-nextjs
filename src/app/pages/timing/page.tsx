@@ -8,9 +8,9 @@ const Page = () => {
   const router = useRouter();
   return (
     <div className='overflow-x-hidden'>
-       <div className="timing w-screen min-h-screen text-white py-10 mt-16">
+       <div className="timing w-screen min-h-screen text-white py-10 mt-10">
 
-<h1 className='sm:text-7xl text-4xl font-bold sm:mt-0 mt-10 text-center py-10'>TIMINGS</h1>
+<h1 className='sm:text-5xl text-4xl font-bold sm:mt-0 mt-10 text-shadow-custom2 text-center py-10'>TIMINGS</h1>
 <div className="about flex justify-center gap-14 items-center sm:mt-0 mt-16 my-10 w-[100vw]">
   <div className="text-center sm:text-start py-1 text-xl flex flex-col sm:gap-5 gap-10 sm:w-[500px] w-[100vw]">
     <div>

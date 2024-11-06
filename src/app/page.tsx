@@ -257,12 +257,11 @@ const Page = () => {
           <br />
           <div className="sm:text-3xl text-2xl ms-1 flex text-white">
             <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl bg-white mx-2" />{" "}
-            Send a gift voucher to friends and family <br /> or buy it now for
-            your future use.
+            use vendor coupons to get amazing discounts for your orders by nasipaipon
           </div>
           <br />
 
-          <button className="aboutbtn mt-10 w-[20vw]">GET VOUCHER</button>
+          <button className="aboutbtn mt-10 w-[20vw] text-pretty">GET COUPON</button>
         </div>
       </div>
 
