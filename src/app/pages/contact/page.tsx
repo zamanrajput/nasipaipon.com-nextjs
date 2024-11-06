@@ -35,7 +35,8 @@ const Page = () => {
     <h1 className='text-lg'>Nasi Paipon</h1>
     <br />
     <p>Address</p>
-    <p className='opacity-80'>Queenslie Point, 120 Stepps Road, Glasgow, Lanarkshire, G33 3NQ</p>
+    <p className='opacity-80'>No.2 Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+    <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
     
     <br />
     
@@ -52,7 +53,7 @@ const Page = () => {
 </div>
 
 <div className="footer cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
-        <div className=' opacity-50'>{"Copyright © 2023 Queen's Bite - All Rights Reserved."}</div>
+        <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
         <div className=' opacity-50'>Privacy Policy</div>
         <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
       </div>

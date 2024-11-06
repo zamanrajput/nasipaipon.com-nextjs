@@ -7,8 +7,8 @@ import aboutImg from '../../../../assets/assets/louis-hansel-1keEJmqm8vU-unsplas
 const Page = () => {
   return (
     <div className='overflow-x-hidden'>
-       <div className="about flex justify-center gap-6 items-center mt-16 h-screen w-screen py-10 backdrop-blur-sm text-white">
-        <div className='sm:w-[40vw] w-[90vw] sm:text-start text-center'>
+       <div className="about flex justify-center gap-6 items-center mt-16 sm:h-screen w-screen py-10 backdrop-blur-sm text-white">
+        <div className='sm:w-[40vw] w-[90vw] sm:text-start text-start'>
           <h1 className='text-5xl font-bold'>
             ABOUT <span className='aboutclr'> US</span> <br />
           </h1>
@@ -20,8 +20,8 @@ const Page = () => {
           <h1 className='text-2xl mt-4 aboutclr font-bold'><span className="text-red-500">Nasi</span><span> Paipon</span></h1>
             <br />
             <p className=''>Address</p>
-            <p className='opacity-80'>Queenslie Point, 120 Stepps Road, Glasgow, Lanarkshire, G33 3NQ</p>
             <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
             
             <br />
             
@@ -29,7 +29,7 @@ const Page = () => {
             <a className='opacity-80' href='tel:+440141 611 2442'>0141 611 2442</a>
             
             <p className='mt-4'>Email</p>
-            <a className='opacity-80 text-red-600 ' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
+            <a className='opacity-80' href="clearbusinessbyadrian@gmail.com">clearbusinessbyadrian@gmail.com</a>
             
         </div>
 
@@ -67,8 +67,8 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="footer cardbg text-white flex w-screen justify-around py-3 sm:mt-72 mt-24">
-        <div className=' opacity-50'>{"Copyright © 2023 Queen's Bite - All Rights Reserved."}</div>
+      <div className="footer cardbg text-white flex sm:flex-row flex-col items-center w-screen justify-around py-3 sm:mt-72 mt-24">
+        <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
         <div className=' opacity-50'>Privacy Policy</div>
         <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
       </div>

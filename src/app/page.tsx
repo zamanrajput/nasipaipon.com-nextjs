@@ -34,7 +34,7 @@ const Page = () => {
   const router = useRouter();
   return (
     <div className=" flex flex-col items-center w-full justify-center overflow-x-hidden  ">
-      <div className="sm:w-[100vw] w-[80vw] h-[95vh] sm:flex mt-20 sm:items-center justify-between">
+      <div className="sm:w-[100vw] w-[90vw] h-[95vh] flex mt-20 sm:items-center justify-between">
         <div className="sm:ms-5 text-pretty backdrop-blur-sm sm:w-[60vw] w-[90vw] rounded-xl p-5 sm:mt-0 mt-24 shadow-xl">
           <div className="sm:text-3xl text-3xl text-white">
             Welcome back! <br />
@@ -82,7 +82,7 @@ const Page = () => {
             </span>
             <span className="text-xl flex flex-col gap-2">
               <span className="sm:text-4xl text-3xl sm:font-bold font-semibold">
-                {"Queen's Bite"}
+                Nasi Paipon
               </span>
               <span className="flex sm:text-[30px] text-[20px] mt-2">
                 <BiSolidStar color="orange" />
@@ -316,7 +316,7 @@ const Page = () => {
             <br />
             <p>Address</p>
             <p className="opacity-80">
-              No.2 Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur
+              Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur
             </p>
 
             <br />
@@ -348,7 +348,7 @@ const Page = () => {
           <br />
           <p className="sm:text-start text-center">Address</p>
           <p className="opacity-80 sm:text-start text-center">
-            Queenslie Point, 120 Stepps Road, Glasgow, Lanarkshire, G33 3NQ
+          {"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}
           </p>
 
           <br />
@@ -387,9 +387,9 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="footer mt-72 cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
+      <div className="footer mt-72 cardbg text-white flex sm:flex-row flex-col w-[100vw] items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
         <div className=" opacity-80">
-          {"Copyright © 2023 Queen's Bite - All Rights Reserved."}
+          {"Copyright © 2023 Nasi Paipon - All Rights Reserved."}
         </div>
         <div className=" opacity-80">Privacy Policy</div>
         <div className=" opacity-80">
