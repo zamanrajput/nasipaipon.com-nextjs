@@ -1,0 +1,424 @@
+"use client";
+import React from "react";
+import { BiSolidStar } from "react-icons/bi";
+import Image from "next/image";
+import sideImg from "../../assets/assets/drumstick.jpeg";
+import OpeningHoursDropdown from "../components/dropdown";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import aboutImg from "../../assets/assets/louis-hansel-1keEJmqm8vU-unsplash.jpg";
+import welcomeImg from "../../assets/assets/welcomeImg.jpg";
+import { FaGoogle } from "react-icons/fa";
+import logo from "../../assets/assets/logo (3).png";
+import { useRouter } from "next/navigation";
+
+const Page = () => {
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  const router = useRouter();
+  return (
+    <div className=" flex flex-col items-center w-full justify-center overflow-x-hidden  ">
+      <div className="sm:w-[100vw] w-[80vw] h-[95vh] sm:flex mt-20 sm:items-center justify-between">
+        <div className="sm:ms-5 text-pretty backdrop-blur-sm sm:w-[60vw] w-[90vw] rounded-xl p-5 sm:mt-0 mt-24 shadow-xl">
+          <div className="sm:text-3xl text-3xl text-white">
+            Welcome back! <br />
+            <h1 className="aboutclr my-2 mb-4 sm:text-6xl text-4xl font-bold">
+              <img width={400} src={logo.src} alt="" />
+            </h1>
+          </div>
+          <div className="sm:text-2xl text-xl text-gray-300 mt-1 ms-1 flex">
+            <div className="hidden sm:flex h-[inherit]] w-5 bg-gray-300 mx-3" />
+            {
+              "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
+            }
+          </div>
+
+          <button className="aboutbtn sm:mt-5 mt-6 w-[20vw]">CONTACT US</button>
+        </div>
+
+        <div className="hidden sm:flex flex-1 items-center justify-end">
+          <div className="me-5 my-">
+            <img
+              className="rounded-lg w-[35vw] h-[440px] shadow-slate-40 shadow-sm "
+              src={welcomeImg.src}
+              alt="aboutImg"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="rev  flex flex-col w-screen sm:mt-0 mt-[-50px]">
+        <div className=" flex  flex-col text-white items-center gap-12 sm:my-12">
+          <h1 className="sm:text-6xl sm:font-bold text-3xl font-semibold">
+            REVIEWS
+          </h1>
+          <div className="flex sm:gap-10 gap-4 items-center">
+            <FaGoogle
+              onClick={() => {
+                window.open("https://www.maps.google.com", "_blank");
+              }}
+              size={30}
+              className="p-2 rounded-full locat bg-white text-black shadow-xl cursor-pointer hover:bg-white hover:text-black"
+            />
+
+            <span className="review sm:text-8xl text-4xl sm:font-bold font-semibold">
+              4.1
+            </span>
+            <span className="text-xl flex flex-col gap-2">
+              <span className="sm:text-4xl text-3xl sm:font-bold font-semibold">
+                {"Queen's Bite"}
+              </span>
+              <span className="flex sm:text-[30px] text-[20px] mt-2">
+                <BiSolidStar color="orange" />
+                <BiSolidStar color="orange" />
+                <BiSolidStar color="orange" />
+                <BiSolidStar color="orange" />
+                <BiSolidStar color="orange" />
+              </span>
+              <span className="text-xl ms-1">445 Reviews</span>
+            </span>
+          </div>
+        </div>
+
+        <Carousel
+          responsive={responsive}
+          className="sm:mx-10 mx-12 sm:mt-0 mt-16 z-10"
+          autoPlay={true}
+          infinite={true}
+          autoPlaySpeed={2000}
+        >
+          <div className="card flex flex-col gap-6 items-center py-10">
+            <div className="flex flex-col gap-4">
+              <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+                D
+              </div>
+
+              <div className="stars flex text-xl">
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+              </div>
+            </div>
+            <div className="text my-6 px-6">
+              This customer did not write a review.
+            </div>
+            <div className="name mt-6">
+              <b>Darren Smith</b> -14/09/2014
+            </div>
+          </div>
+
+          <div className="card  flex flex-col gap-6 items-center py-10">
+            <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+              A
+            </div>
+
+            <div className="stars flex text-xl">
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+            </div>
+            <div className="text my-6 px-6">
+              This customer did not write a review.
+            </div>
+            <div className="name mt-6">
+              <b>Alison Door Bell</b> -24/09/2004
+            </div>
+          </div>
+
+          <div className="card  flex flex-col gap-6 items-center py-10">
+            <div className="flex flex-col gap-4">
+              <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+                J
+              </div>
+
+              <div className="stars flex text-xl">
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="yellow" />
+                <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-around items-center">
+              <div className="text py-6 px-6">
+                I once saw him kill three men with a pencil in a bar{" "}
+                <a className="text-blue-300" title="Read More" href="#">
+                  ....
+                </a>
+              </div>
+              <div className="name mt-6">
+                <b>John Wick</b> -02/09/1964
+              </div>
+            </div>
+          </div>
+
+          <div className="card flex flex-col gap-6 items-center py-10">
+            <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+              F
+            </div>
+
+            <div className="stars flex text-xl">
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+            </div>
+            <div className="text my-6 px-6">
+              This customer did not write a review.
+            </div>
+            <div className="name mt-6">
+              <b>Finch Wecket</b> -12/08/1984
+            </div>
+          </div>
+
+          <div className="card flex ] flex-col gap-6 items-center py-10">
+            <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+              E
+            </div>
+
+            <div className="stars flex text-xl">
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+            </div>
+            <div className="text my-6 px-6">
+              This customer did not write a review.
+            </div>
+            <div className="name mt-6">
+              <b>Eren Vest</b> -02/28/1980
+            </div>
+          </div>
+
+          <div className="card flex  flex-col gap-6 items-center py-10">
+            <div className="circle h-28 w-28 bg-pink-500 flex items-center justify-center text-5xl font-bold">
+              H
+            </div>
+
+            <div className="stars flex text-xl">
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="yellow" />
+              <BiSolidStar className="" color="rgba(255,255,255,0.7)" />
+            </div>
+            <div className="text my-6 px-6">
+              This customer did not write a review.
+            </div>
+            <div className="name mt-6">
+              <b>Heren Meckoley</b> -07/17/1990
+            </div>
+          </div>
+        </Carousel>
+      </div>
+
+      <div className="flex sm:flex-row flex-col items-center justify-center gap-10 px-24 mt-10 w-screen bg-gray-300 bg-opacity-70 py-10">
+        <div className="img rounded-xl sm:w-[30vw] w-[100vw] flex justify-center">
+          <img
+            height={300}
+            width={500}
+            className="rounded-xl sm:w-[38vw] w-[80vw] sm:h-[40vh] h-[30vh]"
+            src={sideImg.src}
+            alt="sideImg"
+          />
+        </div>
+
+        <div className="backdrop-blur-sm sm:w-[60vw] rounded-xl p-10 shadow-xl w-[80vw]">
+          <div className="text-3xl ">
+            <h1 className="aboutclr sm:mt-4 sm:text-6xl sm:font-bold text3xl font-semibold">
+              {" "}
+              GIFT VOUCHERS
+            </h1>
+          </div>
+          <br />
+          <div className="sm:text-3xl text-2xl ms-1 flex">
+            <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl brownbg mx-2" />{" "}
+            Send a gift voucher to friends and family <br /> or buy it now for
+            your future use.
+          </div>
+          <br />
+
+          <button className="aboutbtn mt-10 w-[20vw]">GET VOUCHER</button>
+        </div>
+      </div>
+
+      <div className="sm:w-screen sm:rounded-none rounded-lg w-[80vw] backdrop-blur-sm text-white my-10">
+        <div className="sm:text-5xl text-3xl font-bold text-shadow-custom2 text-center my-10">
+          CONTACT US
+        </div>
+        <div className="flex sm:flex-row flex-col sm:gap-14 gap-4 sm:justify-center items-center my-16">
+          <div className="contact">
+            <div className="form flex flex-col gap-6 items-center sm:items-start sm:w-[35vw] w-[80vw]">
+              <div className="sm:text-2xl text-xl">
+                Enter Your Details
+              </div>
+              <input
+                className="formbg px-6 py-3 rounded-lg w-[70vw] sm:w-[35vw] placeholder-[rgba(000,000,000,0.6)]"
+                type="text"
+                placeholder="Name"
+              />
+              <input
+                className="formbg px-6 py-3 rounded-lg w-[70vw] sm:w-[35vw] placeholder-[rgba(000,000,000,0.6)]"
+                type="text"
+                placeholder="Phone"
+              />
+              <input
+                className="formbg px-6 py-3 rounded-lg w-[70vw] sm:w-[35vw] placeholder-[rgba(000,000,000,0.6)]"
+                type="text"
+                placeholder="Email"
+              />
+              <textarea
+                className="formbg px-6 py-3 rounded-lg w-[70vw] sm:w-[35vw] placeholder-[rgba(000,000,000,0.6)]"
+                name="message"
+                rows={5}
+                id="msg"
+                placeholder="How can we serve you?"
+              ></textarea>
+              <button className="btn my-8 w-[70vw]"> SEND</button>
+            </div>
+          </div>
+
+          <div className="side sm:w-[35vw] w-[70vw] sm:-mt-20 mt-14">
+            <h1 className="text-2xl">SPECIAL REQUEST</h1>
+            <br />
+            <p className="opacity-80">
+              {
+                "Do you have dietary concerns? Questions about an upcoming event? Drop us a line, and we'll get back to you soon"
+              }
+              !
+            </p>
+            <br />
+            <br />
+            <h1 className="text-lg">Nasi Paipon</h1>
+            <br />
+            <p>Address</p>
+            <p className="opacity-80">
+              No.2 Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur
+            </p>
+
+            <br />
+
+            <p className="">Telephone</p>
+            <a className="opacity-80" href="tel:+440141 611 2442">
+              0141 611 2442
+            </a>
+            <br />
+            <p className="">Email</p>
+            <a className="opacity-80" href="clearbusinessbyadrian@gmail.com">
+              clearbusinessbyadrian@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="about flex justify-center gap-6 items-center my-10 w-screen py-10 backdrop-blur-sm text-white">
+        <div className="sm:w-[40vw] w-[100vw]">
+          <h1 className="sm:text-5xl text-3xl w-[100vw] sm:font-bold sm:text-start text-center font-semibold">
+            ABOUT <span className="aboutclr"> US</span> <br />
+          </h1>
+
+          <br />
+
+          <h1 className="sm:text-2xl text-xl mt-4 aboutclr sm:font-bold font-semibold sm:text-start text-center">
+            <span className="text-red-500">Nasi</span><span> Paipon</span>
+          </h1>
+          <br />
+          <p className="sm:text-start text-center">Address</p>
+          <p className="opacity-80 sm:text-start text-center">
+            Queenslie Point, 120 Stepps Road, Glasgow, Lanarkshire, G33 3NQ
+          </p>
+
+          <br />
+
+          <p className="sm:text-start text-center">Telephone</p>
+          <a
+            className="opacity-80 sm:text-start text-center sm:ms-0 ms-[35vw]"
+            href="tel:+440141 611 2442"
+          >
+            0141 611 2442
+          </a>
+
+          <p className="mt-4 sm:text-start text-center">Email</p>
+          <a
+            className="opacity-80 text-red-600 sm:text-start text-center sm:ms-0 ms-[15vw] "
+            href="clearbusinessbyadrian@gmail.com"
+          >
+            clearbusinessbyadrian@gmail.com
+          </a>
+          <h1 className="text-lg mt-8 sm:text-start text-center">
+            OPENING HOURS
+          </h1>
+          <br />
+          <div className="flex justify-center sm:block">
+          <OpeningHoursDropdown />
+          </div>
+        </div>
+
+        <div className=" w-[40vw]">
+          <Image
+            className="rounded-lg sm:block hidden"
+            width={650}
+            src={aboutImg}
+            alt="aboutImg"
+          />
+        </div>
+      </div>
+
+      <div className="footer mt-72 cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
+        <div className=" opacity-80">
+          {"Copyright © 2023 Queen's Bite - All Rights Reserved."}
+        </div>
+        <div className=" opacity-80">Privacy Policy</div>
+        <div className=" opacity-80">
+          Powered by Revolution Software Pakistan
+        </div>
+      </div>
+
+      <div className="fixed bottom-8 right-10">
+        <button
+        onClick={()=>router.push('/pages/download')}
+          className="font-sans flex justify-center gap-2 items-center mx-auto shadow-xl sm:text-lg text-gray-50 bg-[#FE222E] backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-[#FFFFFF] hover:text-red-600 before:-z-10 before:aspect-square before:hover:scale-200 before:hover:duration-500 relative z-[9999] sm:px-4 px-2 sm:py-2 py-1 overflow-hidden border-2 rounded-full group"
+          type="submit"
+        >
+          <span className="sm:block hidden">Order Now</span>
+          <span className="block sm:hidden">Download Now</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 19"
+            className="sm:w-8 sm:h-8 w-6 h-6 justify-end bg-gray-50 group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-red-600 group-hover:border-red-600 sm:p-2 p-1 rotate-45"
+          >
+            <path
+              className="fill-red-700 group-hover:fill-red-700"
+              d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Page;

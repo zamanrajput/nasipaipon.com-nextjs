@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+
+::-webkit-scrollbar {
+  transition: scrollbar-color 0.3s ease-out;
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: green;
+ 
+  border-radius: 10px;
+  
+
+}
+
+
+.cardbg{
+  background-color: rgb(147, 39, 39);
+}
+
+.logoclr{
+  color:rgb(2, 129, 2);
+}
+
+.text-shadow-custom {
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5); /* 2px to the right, no blur, white shadow */
+}
+
+.locat:hover{
+  background-color: rgb(111, 82, 67);
+  transition: 1s;
+  color : white;
+  transform-origin: center center; 
+  transform: scale(1.2);
+}
+
+.circle{
+  clip-path: circle(50% at 50% 50%);
+}
+
+
+.card {
+  width: 325px;
+  height: 400px;
+  background-color: #bd4444;
+  background-image: linear-gradient(43deg,rgb(131, 0, 0) 30%, rgb(251, 131, 131) 100% );
+  border-radius: 8px;
+  color: white;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 30px 40px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.card-content .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: inherit;
+  text-transform: uppercase;
+}
+
+.card-content .card-para {
+  color: inherit;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.card:hover {
+  transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  z-index: 1;
+}
+
+.card:hover:before {
+  transform: translateX(-100%);
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  z-index: 1;
+}
+
+.card:hover:after {
+  transform: translateX(100%);
+}
+
+
+
+.text-shadow-custom2 {
+  text-shadow: 2px 2px 0px rgba(51, 44, 44, 0.2); /* 2px to the right, no blur, white shadow */
+}
+
+.formbg{
+  background-color: rgb(246, 246, 246);
+}
+
+
+.btn {
+  background-color: rgb(203, 55, 55);
+  padding: 14px 40px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px dashed  rgb(203, 55, 55);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: .4s;
+ }
+ 
+ .btn span:last-child {
+  display: none;
+ }
+ 
+ .btn:hover {
+  transition: .4s;
+  border: 2px dashed rgb(203, 55, 55);
+  background-color: #fff;
+  color: rgb(203, 55, 55);
+ }
+ 
+ .btn:active {
+  background-color: rgb(203, 55, 55);
+ }
+ 
+ .aboutclr{
+  color:#00AA01;
+ }
+ .brownbg{
+  background-color:rgba(65, 65, 65, 0.658);
+ }
+
+.browntxt{
+  color: rgba(65, 65, 65, 0.658);
+}
+
+.aboutbtn {
+  width: 200px;
+  color: white;
+  height: 60px;
+  border: 3px solid white;
+  border-radius: 45px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: rgb(203, 55, 55);
+  font-size: 1.2em;
+  font-weight: 550;
+}
+
+.aboutbtn:hover {
+  background: white;
+  color: rgb(203, 55, 55);
+}
+

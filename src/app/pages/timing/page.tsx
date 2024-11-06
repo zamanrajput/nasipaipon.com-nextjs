@@ -1,0 +1,109 @@
+import React from 'react'
+import Image from 'next/image'
+import timing from '../../../../assets/assets/timing.webp'
+
+const Page = () => {
+  return (
+    <div className='overflow-x-hidden'>
+       <div className="timing w-screen text-white py-10 bg-black bg-opacity-40 mt-16">
+
+<h1 className='sm:text-7xl text-4xl font-bold sm:mt-0 mt-10 text-center'>TIMINGS</h1>
+<div className="about flex justify-center gap-14 items-center sm:mt-0 mt-16 my-10 w-[100vw]">
+  <div className="text-center sm:text-start py-1 text-xl flex flex-col sm:gap-5 gap-10 sm:w-[500px] w-[100vw]">
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        MONDAY
+      </span>
+    <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+    </div>
+  
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        TUESDAY
+      </span>
+    <br className='sm:hidden block' /> 
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+    </div>
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        WEDNESDAY
+      </span>
+      <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+
+
+    </div>
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        THURSDAY
+      </span>
+      <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+
+
+    </div>
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        FRIDAY
+      </span>
+      <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+
+
+    </div>
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        SATURDAY
+      </span>
+      <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+
+
+    </div>
+    <div>
+      <span className='text-white text-opacity-70 sm:text-3xl text-3xl'>
+        SUNDAY
+      </span>
+      <br className='sm:hidden block' />
+     <span className='sm:text-4xl text-3xl sm:ms-2'>
+     09:00AM - 07:00PM
+     </span>
+
+    </div>
+
+
+
+  </div>
+
+  <div className='sm:block hidden w-[40vw]'>
+    <Image className='rounded-lg' src={timing} alt='timing' />
+  </div>
+
+</div>
+</div>
+
+<div className="footer cardbg text-white flex sm:flex-row flex-col w-screen items-center gap-2 sm:justify-around py-3 sm:text-base text-xs">
+        <div className=' opacity-50'>{"Copyright © 2023 Queen's Bite - All Rights Reserved."}</div>
+        <div className=' opacity-50'>Privacy Policy</div>
+        <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
+      </div>
+
+
+    </div>
+  )
+}
+
+export default Page
