@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import logo from "../../../../assets/assets/logo (3).png";
 import app1 from "../../../../assets/assets/app/S2.png";
