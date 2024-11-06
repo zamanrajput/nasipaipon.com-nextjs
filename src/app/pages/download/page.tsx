@@ -8,7 +8,7 @@ import app4 from "../../../../assets/assets/app/s4.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   return (
     <div className="bg-opacity-30 overflow-x-hidden">
@@ -125,4 +125,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
