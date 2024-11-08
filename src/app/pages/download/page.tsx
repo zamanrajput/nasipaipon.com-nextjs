@@ -24,7 +24,7 @@ const Page = () => {
           </button>
           <div className="text-2xl text-opacity-70 text-pretty">
             <h1 className="text-3xl my-5">Quality Verified</h1>
-            Our biryani and rice are 100% premium, quality-checked by multiple
+            Our foods are 100% premium, quality-checked by multiple
             standards. Each batch is carefully inspected to ensure exceptional
             flavor and consistency, so you can enjoy every serving with
             confidence!

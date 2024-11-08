@@ -44,8 +44,12 @@ const Page = () => {
           <br />
             <p className='text-lg'>Sales Stall</p>
             <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='text-lg'>Location</p>
+            <a className="text-blue-500 underline cursor-pointer" href=" https://maps.app.goo.gl/N2TpjEFDW8Uogun16?g_st=ac"> View on Map</a>
             <p className='text-lg'>Central Kitchen</p>
             <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
+            <p className='text-lg'>Location</p>
+            <a className="text-blue-500 underline cursor-pointer" href=" https://maps.app.goo.gl/gsB5mNHciFbz73vc8"> View on Map</a>
             
             <br />
             

@@ -55,7 +55,7 @@ const Page = () => {
 
       </div>
 
-      <div className="rev  flex flex-col w-screen sm:mt-28">
+      <div className="rev  flex flex-col w-screen sm:mt-28 mt-36">
         <div className=" flex  flex-col text-white items-center gap-12 sm:my-12">
           <h1 className="sm:text-6xl sm:font-bold text-3xl font-semibold">
             REVIEWS
@@ -247,12 +247,10 @@ const Page = () => {
           </div>
           <br />
           <div className="sm:text-3xl text-2xl ms-1 flex text-white">
-            <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl bg-white mx-2" />{" "}
-            use vendor coupons to get amazing discounts for your orders by nasipaipon
+            <div className="sm:flex hidden h-[inherit] mt-1 w-2 rounded-xl bg-white mx-2 text-pretty" />{" "}
+            Each vendor has a feature to issue discount coupons to eligible customers. Please contact the vendor through the Nasi Paipon application message system about the coupon.
           </div>
-          <br />
 
-          <button className="aboutbtn mt-10 w-[20vw] text-pretty">GET COUPON</button>
         </div>
       </div>
 
@@ -315,11 +313,14 @@ const Page = () => {
           <br />
             <p className='text-lg'>Sales Stall</p>
             <p className='opacity-80'>Jalan 5/4C Desa Melawati Kuala Lumpur, 53100 Kuala Lumpur</p>
+            <p className='text-lg'>Location</p>
+            <a className="text-blue-500 underline cursor-pointer" href=" https://maps.app.goo.gl/N2TpjEFDW8Uogun16?g_st=ac"> View on Map</a>
             <p className='text-lg'>Central Kitchen</p>
             <p className='opacity-80'>{"NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG, SELANGOR"}</p>
-            
+            <p className='text-lg'>Location</p>
+            <a className="text-blue-500 underline cursor-pointer" href=" https://maps.app.goo.gl/gsB5mNHciFbz73vc8"> View on Map</a>
             <br />
-            
+            <br />
             <p className=''>Telephone</p>
             <a className='opacity-80' href='tel:+6018 274 3679'>+6018 274 3679</a>
             <br />
