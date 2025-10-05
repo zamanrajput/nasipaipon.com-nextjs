@@ -4,9 +4,9 @@ import React from "react";
 
 const SupportPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
-      <h1 className="text-3xl font-bold mb-4">Nasi Paipon Support</h1>
-      <p className="text-center text-gray-700 mb-8">
+    <div className="min-h-screen  flex flex-col items-center justify-center p-6">
+      <h1 className="text-3xl text-white font-bold mb-4">Support</h1>
+      <p className="text-center text-white mb-8">
         Need help? Our support team is here for you! Choose one of the options below:
       </p>
 
@@ -19,7 +19,7 @@ const SupportPage: React.FC = () => {
           </p>
           <a
             href="mailto:usersupport@nasipaipon.com"
-            className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+            className="inline-block bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition"
           >
             Email Us
           </a>
@@ -35,9 +35,9 @@ const SupportPage: React.FC = () => {
             href="https://wa.me/60163620784"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+            className="inline-block bg-green-600 text-white px-4 py-2 hover:bg-green-600 transition rounded-full"
           >
-            Chat on WhatsApp
+           Chat Now
           </a>
         </div>
       </div>
