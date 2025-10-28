@@ -22,7 +22,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\generated\\prisma",
+      "value": "C:\\GitHub\\nasipaipon.com-nextjs\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -36,7 +36,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\GitHub\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../prisma",

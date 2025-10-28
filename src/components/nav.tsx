@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/assets/NASI PAIPON.png";
+import authClient from "@/lib/clients/auth";
 
 type MenuItemNav = {
   name: string;
@@ -13,22 +14,23 @@ const TopNavBar = () => {
   const [cIndex, setCIndex] = useState(-1);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   // Form states
   const [loginForm, setLoginForm] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
   });
   const [registerForm, setRegisterForm] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
   });
   const [loginErrors, setLoginErrors] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
   });
   const [registerErrors, setRegisterErrors] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
   });
   const [isLoginView, setIsLoginView] = useState(true);
@@ -43,6 +45,15 @@ const TopNavBar = () => {
     { name: "ABOUT", url: "/pages/about" },
     { name: "PRIVACY", url: "/pages/privacy" },
   ];
+
+  useEffect(() => {
+    authClient.me().then(setCurrentUser);
+  }, []);
+
+  const handleLogout = async () => {
+    await authClient.logout();
+    setCurrentUser(null);
+  };
 
   useEffect(() => {
     const url = location.href;
@@ -63,10 +74,10 @@ const TopNavBar = () => {
   // Form validation functions
   const validateLoginForm = () => {
     let isValid = true;
-    const newErrors = { usernameOrEmail: "", password: "" };
+    const newErrors = { email: "", password: "" };
 
-    if (!loginForm.usernameOrEmail.trim()) {
-      newErrors.usernameOrEmail = "Username or email is required";
+    if (!loginForm.email.trim()) {
+      newErrors.email = "email is required";
       isValid = false;
     }
 
@@ -84,10 +95,10 @@ const TopNavBar = () => {
 
   const validateRegisterForm = () => {
     let isValid = true;
-    const newErrors = { usernameOrEmail: "", password: "" };
+    const newErrors = { email: "", password: "" };
 
-    if (!registerForm.usernameOrEmail.trim()) {
-      newErrors.usernameOrEmail = "Username or email is required";
+    if (!registerForm.email.trim()) {
+      newErrors.email = "email is required";
       isValid = false;
     }
 
@@ -103,86 +114,50 @@ const TopNavBar = () => {
     return isValid;
   };
 
-  // API call functions (to be implemented later)
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateLoginForm()) return;
-
     setIsLoading(true);
     setApiError("");
 
+    const res = await authClient.login(loginForm.email, loginForm.password);
     try {
-      // TODO: Implement actual API call
-      // const response = await fetch('/api/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(loginForm),
-      // });
+      if (res.error) throw new Error(res.error);
 
-      // const data = await response.json();
-
-      // if (!response.ok) {
-      //   throw new Error(data.message || 'Login failed');
-      // }
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // On success
-      console.log("Login successful", loginForm);
+      console.log("Login successful", res.user);
+      alert(`Welcome back, ${res.user?.username}!`);
       setPopoverOpen(false);
-      // Reset form
-      setLoginForm({ usernameOrEmail: "", password: "" });
-    } catch (error) {
-      // Handle API error
-      setApiError(
-        error instanceof Error ? error.message : "An unknown error occurred"
-      );
+      setLoginForm({ email: "", password: "" });
+    } catch (err) {
+      setApiError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setIsLoading(false);
     }
+    if (!res.error) window.location.reload();
   };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateRegisterForm()) return;
-
     setIsLoading(true);
     setApiError("");
 
     try {
-      // TODO: Implement actual API call
-      // const response = await fetch('/api/register', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(registerForm),
-      // });
-
-      // const data = await response.json();
-
-      // if (!response.ok) {
-      //   throw new Error(data.message || 'Registration failed');
-      // }
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // On success
-      console.log("Registration successful", registerForm);
-      setPopoverOpen(false);
-      // Reset form
-      setRegisterForm({ usernameOrEmail: "", password: "" });
-    } catch (error) {
-      // Handle API error
-      setApiError(
-        error instanceof Error ? error.message : "An unknown error occurred"
+      const res = await authClient.register(
+        registerForm.email,
+        registerForm.password
       );
+
+      if (res.error) throw new Error(res.error);
+
+      console.log("Registration successful", res.user);
+      alert("Registered successfully! Please login now.");
+      setIsLoginView(true);
+      setRegisterForm({ email: "", password: "" });
+    } catch (err) {
+      setApiError(err instanceof Error ? err.message : "Registration failed");
     } finally {
       setIsLoading(false);
     }
@@ -225,12 +200,21 @@ const TopNavBar = () => {
           >
             Download App
           </button>
-          <button
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            className="px-4 py-2 bg-[#FE222E] text-white rounded-lg"
-          >
-            Login
-          </button>
+          {currentUser ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 px-4 py-2 rounded"
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              onClick={() => setPopoverOpen(true)}
+              className="px-4 py-2 bg-[#FE222E] text-white rounded-lg"
+            >
+              Login
+            </button>
+          )}
         </div>
       </nav>
 
@@ -314,12 +298,21 @@ const TopNavBar = () => {
           </button>
         </div>
         <div className="px-6 mt-3">
-          <button
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            className="px-4 py-2 bg-[#FE222E] text-white rounded-lg"
-          >
-            Login
-          </button>
+          {currentUser ? (
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 px-4 py-2 rounded"
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              onClick={() => setPopoverOpen(true)}
+              className="px-4 py-2 bg-[#FE222E] text-white rounded-lg"
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
 
@@ -384,30 +377,28 @@ const TopNavBar = () => {
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label
-                    htmlFor="login-username"
+                    htmlFor="login-email"
                     className="block text-gray-700 mb-2"
                   >
-                    Username or Email
+                    Email
                   </label>
                   <input
-                    id="login-username"
+                    id="login-email"
                     type="text"
                     className={`w-full px-3 py-2 border rounded-md ${
-                      loginErrors.usernameOrEmail
-                        ? "border-red-500"
-                        : "border-gray-300"
+                      loginErrors.email ? "border-red-500" : "border-gray-300"
                     }`}
-                    value={loginForm.usernameOrEmail}
+                    value={loginForm.email}
                     onChange={(e) =>
                       setLoginForm({
                         ...loginForm,
-                        usernameOrEmail: e.target.value,
+                        email: e.target.value,
                       })
                     }
                   />
-                  {loginErrors.usernameOrEmail && (
+                  {loginErrors.email && (
                     <p className="mt-1 text-red-500 text-sm">
-                      {loginErrors.usernameOrEmail}
+                      {loginErrors.email}
                     </p>
                   )}
                 </div>
@@ -477,30 +468,30 @@ const TopNavBar = () => {
               <form onSubmit={handleRegister}>
                 <div className="mb-4">
                   <label
-                    htmlFor="register-username"
+                    htmlFor="register-email"
                     className="block text-gray-700 mb-2"
                   >
-                    Username or Email
+                    Email
                   </label>
                   <input
-                    id="register-username"
+                    id="register-email"
                     type="text"
                     className={`w-full px-3 py-2 border rounded-md ${
-                      registerErrors.usernameOrEmail
+                      registerErrors.email
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
-                    value={registerForm.usernameOrEmail}
+                    value={registerForm.email}
                     onChange={(e) =>
                       setRegisterForm({
                         ...registerForm,
-                        usernameOrEmail: e.target.value,
+                        email: e.target.value,
                       })
                     }
                   />
-                  {registerErrors.usernameOrEmail && (
+                  {registerErrors.email && (
                     <p className="mt-1 text-red-500 text-sm">
-                      {registerErrors.usernameOrEmail}
+                      {registerErrors.email}
                     </p>
                   )}
                 </div>
