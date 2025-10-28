@@ -3,3 +3,5 @@ node_modules
 
 out
 src/favicon_io.zip
+
+/src/generated/prisma
