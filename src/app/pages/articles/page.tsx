@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CalendarDays, User, Clock, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Articles | CoreLogic',
+  title: 'Articles | NasiPaipon',
   description: 'Read our latest articles and insights',
 }
 
