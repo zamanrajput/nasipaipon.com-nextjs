@@ -18,7 +18,7 @@ export default function Page() {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`/api/articles/${articleId}`);
+        const response = await fetch(`/api/admin/articles/${articleId}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch article');
@@ -42,7 +42,7 @@ export default function Page() {
   // Handle article update
   const handleUpdate = async (articleData: any) => {
     try {
-      const response = await fetch(`/api/articles/${articleId}`, {
+      const response = await fetch(`/api/admin/articles/${articleId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function Page() {
       console.log('Article updated successfully:', result);
       
       // Optional: Show success message or redirect
-      router.push('/articles');
+      router.back();
     } catch (err: any) {
       console.error('Error updating article:', err);
       alert('Failed to update article: ' + err.message);

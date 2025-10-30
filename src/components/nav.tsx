@@ -202,12 +202,25 @@ const TopNavBar = () => {
             Download App
           </button>
           {currentUser ? (
-            <button
+           <div className="space-x-2">
+            {
+currentUser.username=='admin@nasipaipon.com' &&
+<button
+onClick={()=>{
+  router.push('/admin/articles')
+}}
+className="bg-gray-500 px-4 py-2 rounded"
+>
+Manage Articles
+</button>
+            }
+             <button
               onClick={handleLogout}
               className="bg-red-500 px-4 py-2 rounded"
             >
               Logout
             </button>
+            </div>
           ) : (
             <button
               onClick={() => setPopoverOpen(true)}

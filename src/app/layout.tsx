@@ -1,9 +1,8 @@
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import TopNavBar from "@/components/nav";
-import bgimg from '../../assets/assets/3colorbg.png'
+import bgimg from "../../assets/assets/3colorbg.png";
 import AppFooter from "@/components/footer";
 
 const geistSans = localFont({
@@ -27,33 +26,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} text-black antialiased`}
       >
-        <TopNavBar/>
-      
+        <TopNavBar />
 
-        <div  className={` bg-fixed h-[100vh] overflow-y-auto wallpaper absolute  w-screen`}>
-          <div  className="h-[100vh] w-full overflow-y-auto absolute bg-black bg-opacity-30">
-      
-          <img alt="background"  src={bgimg.src} className="w-full h-full bg-cover fixed -z-10"/>
-    
+        <div
+          className={` bg-fixed h-[100vh] overflow-y-auto wallpaper absolute  w-screen`}
+        >
+          <div className="h-[100vh] flex flex-col w-full overflow-y-auto absolute bg-black bg-opacity-30">
+            <img
+              alt="background"
+              src={bgimg.src}
+              className="w-full h-full bg-cover fixed -z-10"
+            />
 
+            <div className="flex-1">{children}</div>
 
-          {children}
-
-          <AppFooter/>
-
+            <AppFooter />
           </div>
         </div>
-
-
       </body>
     </html>
   );
