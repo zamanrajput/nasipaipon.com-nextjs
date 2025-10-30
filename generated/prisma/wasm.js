@@ -216,7 +216,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\generated\\prisma",
+      "value": "/www/wwwroot/nasipaipon.com/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -225,12 +225,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-1.1.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
+    "sourceFilePath": "/www/wwwroot/nasipaipon.com/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
