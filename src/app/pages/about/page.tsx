@@ -70,11 +70,7 @@ const Page = () => {
       </div>
 
 
-      <div className="footer cardbg text-white flex sm:flex-row flex-col items-center w-screen justify-around py-3 sm:mt-72 mt-24">
-        <div className=' opacity-50'>{"Copyright © 2023 Nasi Paipon - All Rights Reserved."}</div>
-        <div onClick={()=>router.push('/pages/download')} className=' opacity-50'>Privacy Policy</div>
-        <div className=' opacity-50'>Powered by Revolution Software Pakistan</div>
-      </div>
+  
 
     </div>
   )

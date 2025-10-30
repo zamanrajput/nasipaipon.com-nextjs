@@ -62,6 +62,7 @@ enum BlockType {
   SUBHEADING
   PARAGRAPH
   IMAGE
+  VIDEO
 }
 
 model Comment {

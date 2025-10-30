@@ -42,7 +42,8 @@ export namespace $Enums {
   HEADING: 'HEADING',
   SUBHEADING: 'SUBHEADING',
   PARAGRAPH: 'PARAGRAPH',
-  IMAGE: 'IMAGE'
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
 };
 
 export type BlockType = (typeof BlockType)[keyof typeof BlockType]

@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import TopNavBar from "@/components/nav";
 import bgimg from '../../assets/assets/3colorbg.png'
+import AppFooter from "@/components/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -47,6 +48,7 @@ export default function RootLayout({
 
           {children}
 
+          <AppFooter/>
 
           </div>
         </div>

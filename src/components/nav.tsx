@@ -52,6 +52,7 @@ const TopNavBar = () => {
 
   const handleLogout = async () => {
     await authClient.logout();
+    window.location.reload()
     setCurrentUser(null);
   };
 
@@ -126,7 +127,7 @@ const TopNavBar = () => {
       if (res.error) throw new Error(res.error);
 
       console.log("Login successful", res.user);
-      alert(`Welcome back, ${res.user?.username}!`);
+      // alert(`Welcome back, ${res.user?.username}!`);
       setPopoverOpen(false);
       setLoginForm({ email: "", password: "" });
     } catch (err) {

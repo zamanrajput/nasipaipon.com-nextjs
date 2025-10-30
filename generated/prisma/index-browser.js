@@ -223,7 +223,8 @@ exports.BlockType = exports.$Enums.BlockType = {
   HEADING: 'HEADING',
   SUBHEADING: 'SUBHEADING',
   PARAGRAPH: 'PARAGRAPH',
-  IMAGE: 'IMAGE'
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
 };
 
 exports.Prisma.ModelName = {
