@@ -196,7 +196,11 @@ exports.BlockType = exports.$Enums.BlockType = {
   SUBHEADING: 'SUBHEADING',
   PARAGRAPH: 'PARAGRAPH',
   IMAGE: 'IMAGE',
-  VIDEO: 'VIDEO'
+  VIDEO: 'VIDEO',
+  TABLE: 'TABLE',
+  ORDERED_LIST: 'ORDERED_LIST',
+  UNORDERED_LIST: 'UNORDERED_LIST',
+  CHECKLIST: 'CHECKLIST'
 };
 
 exports.Prisma.ModelName = {
@@ -216,7 +220,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/www/wwwroot/nasipaipon.com/generated/prisma",
+      "value": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -225,12 +229,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-1.1.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/www/wwwroot/nasipaipon.com/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -253,8 +257,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  username  String   @unique\n  password  String\n  createdAt DateTime @default(now())\n}\n\n// Article Management System Models\nmodel Article {\n  id          String    @id @default(cuid())\n  title       String\n  slug        String    @unique\n  author      String\n  authorEmail String?\n  thumbnail   String?   @db.Text\n  excerpt     String?   @db.Text\n  published   Boolean   @default(false)\n  publishedAt DateTime?\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n\n  blocks   ArticleBlock[]\n  comments Comment[]\n\n  @@index([slug])\n  @@index([published])\n}\n\nmodel ArticleBlock {\n  id        String    @id @default(cuid())\n  articleId String\n  type      BlockType\n  content   String    @db.Text\n  order     Int\n  metadata  Json?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)\n\n  @@index([articleId, order])\n}\n\nenum BlockType {\n  HEADING\n  SUBHEADING\n  PARAGRAPH\n  IMAGE\n  VIDEO\n}\n\nmodel Comment {\n  id        String   @id @default(cuid())\n  articleId String\n  parentId  String?\n  author    String\n  email     String?\n  content   String   @db.Text\n  approved  Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  article Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)\n  parent  Comment?  @relation(\"CommentReplies\", fields: [parentId], references: [id], onDelete: Cascade)\n  replies Comment[] @relation(\"CommentReplies\")\n\n  @@index([articleId])\n  @@index([parentId])\n  @@index([approved])\n}\n",
-  "inlineSchemaHash": "84f18221f895fe8a542cb6e78bca43a7c49c864b3e8b3466410260faea003c1b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  username  String   @unique\n  password  String\n  createdAt DateTime @default(now())\n}\n\n// Article Management System Models\nmodel Article {\n  id          String    @id @default(cuid())\n  title       String\n  slug        String    @unique\n  author      String\n  authorEmail String?\n  thumbnail   String?   @db.Text\n  excerpt     String?   @db.Text\n  published   Boolean   @default(false)\n  publishedAt DateTime?\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n\n  blocks   ArticleBlock[]\n  comments Comment[]\n\n  @@index([slug])\n  @@index([published])\n}\n\nmodel ArticleBlock {\n  id        String    @id @default(cuid())\n  articleId String\n  type      BlockType\n  content   String    @db.Text\n  order     Int\n  metadata  Json?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  article Article @relation(fields: [articleId], references: [id], onDelete: Cascade)\n\n  @@index([articleId, order])\n}\n\nenum BlockType {\n  HEADING\n  SUBHEADING\n  PARAGRAPH\n  IMAGE\n  VIDEO\n  TABLE\n  ORDERED_LIST\n  UNORDERED_LIST\n  CHECKLIST\n}\n\nmodel Comment {\n  id        String   @id @default(cuid())\n  articleId String\n  parentId  String?\n  author    String\n  email     String?\n  content   String   @db.Text\n  approved  Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  article Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)\n  parent  Comment?  @relation(\"CommentReplies\", fields: [parentId], references: [id], onDelete: Cascade)\n  replies Comment[] @relation(\"CommentReplies\")\n\n  @@index([articleId])\n  @@index([parentId])\n  @@index([approved])\n}\n",
+  "inlineSchemaHash": "51127e91efe750b09fbb0111e8c47fa10e97a7029ffb53305794b75fd8057cad",
   "copyEngine": true
 }
 config.dirname = '/'

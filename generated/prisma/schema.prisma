@@ -63,6 +63,10 @@ enum BlockType {
   PARAGRAPH
   IMAGE
   VIDEO
+  TABLE
+  ORDERED_LIST
+  UNORDERED_LIST
+  CHECKLIST
 }
 
 model Comment {

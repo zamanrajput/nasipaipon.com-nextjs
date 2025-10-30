@@ -28,7 +28,11 @@ import {
   Save,
   Loader2,
   FileEdit,
-  CheckCircle2
+  CheckCircle2,
+  Table as TableIcon,
+  List,
+  ListOrdered,
+  CheckSquare
 } from 'lucide-react';
 
 // Types
@@ -38,6 +42,10 @@ export enum BlockType {
   PARAGRAPH = 'PARAGRAPH',
   IMAGE = 'IMAGE',
   VIDEO = 'VIDEO',
+  TABLE = 'TABLE',
+  ORDERED_LIST = 'ORDERED_LIST',
+  UNORDERED_LIST = 'UNORDERED_LIST',
+  CHECKLIST = 'CHECKLIST',
 }
 
 export enum MediaSize {
@@ -53,11 +61,23 @@ export enum MediaAlign {
   RIGHT = 'RIGHT',
 }
 
+interface TableData {
+  headers: string[];
+  rows: string[][];
+}
+
+interface ListItem {
+  text: string;
+  checked?: boolean;
+}
+
 interface BlockMetadata {
   size?: MediaSize;
   align?: MediaAlign;
   caption?: string;
   alt?: string;
+  hasHeader?: boolean;
+  listStyle?: 'disc' | 'circle' | 'square' | 'decimal';
 }
 
 interface ArticleBlock {
@@ -72,6 +92,7 @@ interface ArticleBuilderProps {
   onSave?: (data: any) => Promise<void>;
   initialData?: any;
   isEdit?: boolean;
+  isSaving?: boolean;
 }
 
 const componentTypes = [
@@ -80,9 +101,13 @@ const componentTypes = [
   { type: BlockType.PARAGRAPH, icon: Type, label: 'Paragraph', desc: 'Body text content' },
   { type: BlockType.IMAGE, icon: ImageIcon, label: 'Image', desc: 'Upload image' },
   { type: BlockType.VIDEO, icon: Video, label: 'Video', desc: 'Embed video' },
+  { type: BlockType.TABLE, icon: TableIcon, label: 'Table', desc: 'Data table' },
+  { type: BlockType.ORDERED_LIST, icon: ListOrdered, label: 'Numbered List', desc: 'Ordered list' },
+  { type: BlockType.UNORDERED_LIST, icon: List, label: 'Bullet List', desc: 'Unordered list' },
+  { type: BlockType.CHECKLIST, icon: CheckSquare, label: 'Checklist', desc: 'Todo list' },
 ];
 
-export default function ArticleBuilder({ onSave, initialData, isEdit = false }: ArticleBuilderProps) {
+export default function ArticleBuilder({ onSave, initialData, isEdit = false, isSaving = false }: ArticleBuilderProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
@@ -180,14 +205,48 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
 
   // Add block
   const addBlock = () => {
+    let defaultContent = '';
+    let defaultMetadata: BlockMetadata | undefined = undefined;
+
+    // Set default content based on block type
+    switch (selectedBlockType) {
+      case BlockType.TABLE:
+        defaultContent = JSON.stringify({
+          headers: ['Column 1', 'Column 2', 'Column 3'],
+          rows: [
+            ['Data 1', 'Data 2', 'Data 3'],
+            ['Data 4', 'Data 5', 'Data 6']
+          ]
+        });
+        defaultMetadata = { hasHeader: true };
+        break;
+      case BlockType.ORDERED_LIST:
+      case BlockType.UNORDERED_LIST:
+        defaultContent = JSON.stringify({
+          items: ['Item 1', 'Item 2', 'Item 3']
+        });
+        defaultMetadata = { listStyle: selectedBlockType === BlockType.ORDERED_LIST ? 'decimal' : 'disc' };
+        break;
+      case BlockType.CHECKLIST:
+        defaultContent = JSON.stringify({
+          items: [
+            { text: 'Task 1', checked: false },
+            { text: 'Task 2', checked: false }
+          ]
+        });
+        break;
+      case BlockType.IMAGE:
+      case BlockType.VIDEO:
+        defaultMetadata = { size: MediaSize.LARGE, align: MediaAlign.CENTER };
+        break;
+    }
+
     const newBlock: ArticleBlock = {
       id: generateId(),
       type: selectedBlockType,
-      content: '',
+      content: defaultContent,
       order: blocks.length,
-      metadata: selectedBlockType === BlockType.IMAGE || selectedBlockType === BlockType.VIDEO
-        ? { size: MediaSize.LARGE, align: MediaAlign.CENTER }
-        : undefined,
+      metadata: defaultMetadata,
     };
     setBlocks(prev => [...prev, newBlock]);
     setShowAddModal(false);
@@ -215,6 +274,82 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
       const filtered = prev.filter(b => b.id !== id);
       return filtered.map((block, index) => ({ ...block, order: index }));
     });
+  };
+
+  // Table functions
+  const updateTableData = (blockId: string, tableData: TableData) => {
+    updateBlock(blockId, { content: JSON.stringify(tableData) });
+  };
+
+  const addTableRow = (blockId: string) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const tableData: TableData = JSON.parse(block.content);
+    tableData.rows.push(new Array(tableData.headers.length).fill(''));
+    updateTableData(blockId, tableData);
+  };
+
+  const addTableColumn = (blockId: string) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const tableData: TableData = JSON.parse(block.content);
+    tableData.headers.push(`Column ${tableData.headers.length + 1}`);
+    tableData.rows = tableData.rows.map(row => [...row, '']);
+    updateTableData(blockId, tableData);
+  };
+
+  const removeTableRow = (blockId: string, rowIndex: number) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const tableData: TableData = JSON.parse(block.content);
+    tableData.rows.splice(rowIndex, 1);
+    updateTableData(blockId, tableData);
+  };
+
+  const removeTableColumn = (blockId: string, colIndex: number) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const tableData: TableData = JSON.parse(block.content);
+    tableData.headers.splice(colIndex, 1);
+    tableData.rows = tableData.rows.map(row => {
+      const newRow = [...row];
+      newRow.splice(colIndex, 1);
+      return newRow;
+    });
+    updateTableData(blockId, tableData);
+  };
+
+  // List functions
+  const updateListItems = (blockId: string, items: string[] | ListItem[]) => {
+    updateBlock(blockId, { content: JSON.stringify({ items }) });
+  };
+
+  const addListItem = (blockId: string) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const data = JSON.parse(block.content);
+    if (block.type === BlockType.CHECKLIST) {
+      data.items.push({ text: '', checked: false });
+    } else {
+      data.items.push('');
+    }
+    updateBlock(blockId, { content: JSON.stringify(data) });
+  };
+
+  const removeListItem = (blockId: string, index: number) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const data = JSON.parse(block.content);
+    data.items.splice(index, 1);
+    updateBlock(blockId, { content: JSON.stringify(data) });
+  };
+
+  const updateListItem = (blockId: string, index: number, value: string | ListItem) => {
+    const block = blocks.find(b => b.id === blockId);
+    if (!block) return;
+    const data = JSON.parse(block.content);
+    data.items[index] = value;
+    updateBlock(blockId, { content: JSON.stringify(data) });
   };
 
   // Drag handlers
@@ -252,7 +387,6 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
       };
 
       if (onSave) await onSave(articleData);
-      alert(isEdit ? 'Article updated!' : 'Article created!');
     } catch (error) {
       console.error('Error saving article:', error);
       alert('Failed to save article');
@@ -281,8 +415,16 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
         return <h1 className="text-4xl font-bold mb-4">{block.content || 'Heading...'}</h1>;
       case BlockType.SUBHEADING:
         return <h2 className="text-2xl font-semibold mb-3">{block.content || 'Subheading...'}</h2>;
-      case BlockType.PARAGRAPH:
-        return <p className="text-gray-700 mb-4 leading-relaxed">{block.content || 'Paragraph...'}</p>;
+     
+        case BlockType.PARAGRAPH:
+          return (
+            <p 
+              className="text-gray-700 mb-4 leading-relaxed" 
+              style={{ whiteSpace: 'pre-wrap' }}
+            >
+              {block.content || 'Paragraph...'}
+            </p>
+          );
       case BlockType.IMAGE:
         if (!block.content) return <div className="bg-gray-200 h-48 rounded flex items-center justify-center text-gray-400">No image</div>;
         return (
@@ -299,8 +441,421 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
             </div>
           </div>
         );
+      case BlockType.TABLE:
+        try {
+          const tableData: TableData = JSON.parse(block.content);
+          return (
+            <div className="mb-4 overflow-x-auto">
+              <table className="min-w-full border-collapse border border-gray-300">
+                {block.metadata?.hasHeader && (
+                  <thead>
+                    <tr className="bg-gray-100">
+                      {tableData.headers.map((header, i) => (
+                        <th key={i} className="border border-gray-300 px-4 py-2 text-left font-semibold">
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                )}
+                <tbody>
+                  {tableData.rows.map((row, i) => (
+                    <tr key={i} className="hover:bg-gray-50">
+                      {row.map((cell, j) => (
+                        <td key={j} className="border border-gray-300 px-4 py-2">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid table data</div>;
+        }
+      case BlockType.ORDERED_LIST:
+        try {
+          const listData = JSON.parse(block.content);
+          return (
+            <ol className="list-decimal list-inside mb-4 space-y-1">
+              {listData.items.map((item: string, i: number) => (
+                <li key={i} className="text-gray-700">{item}</li>
+              ))}
+            </ol>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid list data</div>;
+        }
+      case BlockType.UNORDERED_LIST:
+        try {
+          const listData = JSON.parse(block.content);
+          return (
+            <ul className="list-disc list-inside mb-4 space-y-1">
+              {listData.items.map((item: string, i: number) => (
+                <li key={i} className="text-gray-700">{item}</li>
+              ))}
+            </ul>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid list data</div>;
+        }
+      case BlockType.CHECKLIST:
+        try {
+          const checklistData = JSON.parse(block.content);
+          return (
+            <div className="mb-4 space-y-2">
+              {checklistData.items.map((item: ListItem, i: number) => (
+                <div key={i} className="flex items-center gap-2">
+                  <input 
+                    type="checkbox" 
+                    checked={item.checked} 
+                    readOnly 
+                    className="w-4 h-4"
+                  />
+                  <span className={`text-gray-700 ${item.checked ? 'line-through text-gray-400' : ''}`}>
+                    {item.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid checklist data</div>;
+        }
       default:
         return null;
+    }
+  };
+
+  // Render block editor
+  const renderBlockEditor = (block: ArticleBlock) => {
+    switch (block.type) {
+      case BlockType.TABLE:
+        try {
+          const tableData: TableData = JSON.parse(block.content);
+          return (
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-2">
+                <Switch
+                  checked={block.metadata?.hasHeader ?? true}
+                  onCheckedChange={(checked) => updateBlockMetadata(block.id, { hasHeader: checked })}
+                />
+                <Label>Show headers</Label>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      {tableData.headers.map((header, i) => (
+                        <th key={i} className="border p-1">
+                          <div className="flex items-center gap-1">
+                            <Input
+                              value={header}
+                              onChange={(e) => {
+                                const newTableData = { ...tableData };
+                                newTableData.headers[i] = e.target.value;
+                                updateTableData(block.id, newTableData);
+                              }}
+                              className="text-sm"
+                            />
+                            {tableData.headers.length > 1 && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeTableColumn(block.id, i)}
+                              >
+                                <X className="h-3 w-3" />
+                              </Button>
+                            )}
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tableData.rows.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {row.map((cell, colIndex) => (
+                          <td key={colIndex} className="border p-1">
+                            <Input
+                              value={cell}
+                              onChange={(e) => {
+                                const newTableData = { ...tableData };
+                                newTableData.rows[rowIndex][colIndex] = e.target.value;
+                                updateTableData(block.id, newTableData);
+                              }}
+                              className="text-sm"
+                            />
+                          </td>
+                        ))}
+                        <td className="border-0 p-1">
+                          {tableData.rows.length > 1 && (
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => removeTableRow(block.id, rowIndex)}
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => addTableRow(block.id)}
+                >
+                  <Plus className="h-3 w-3 mr-1" />
+                  Add Row
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => addTableColumn(block.id)}
+                >
+                  <Plus className="h-3 w-3 mr-1" />
+                  Add Column
+                </Button>
+              </div>
+            </div>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid table data</div>;
+        }
+
+      case BlockType.ORDERED_LIST:
+      case BlockType.UNORDERED_LIST:
+        try {
+          const listData = JSON.parse(block.content);
+          return (
+            <div className="space-y-2">
+              {listData.items.map((item: string, i: number) => (
+                <div key={i} className="flex items-center gap-2">
+                  <Input
+                    value={item}
+                    onChange={(e) => updateListItem(block.id, i, e.target.value)}
+                    placeholder={`Item ${i + 1}`}
+                  />
+                  {listData.items.length > 1 && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => removeListItem(block.id, i)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => addListItem(block.id)}
+              >
+                <Plus className="h-3 w-3 mr-1" />
+                Add Item
+              </Button>
+            </div>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid list data</div>;
+        }
+
+      case BlockType.CHECKLIST:
+        try {
+          const checklistData = JSON.parse(block.content);
+          return (
+            <div className="space-y-2">
+              {checklistData.items.map((item: ListItem, i: number) => (
+                <div key={i} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={item.checked}
+                    onChange={(e) => updateListItem(block.id, i, { ...item, checked: e.target.checked })}
+                    className="w-4 h-4"
+                  />
+                  <Input
+                    value={item.text}
+                    onChange={(e) => updateListItem(block.id, i, { ...item, text: e.target.value })}
+                    placeholder={`Task ${i + 1}`}
+                  />
+                  {checklistData.items.length > 1 && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => removeListItem(block.id, i)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => addListItem(block.id)}
+              >
+                <Plus className="h-3 w-3 mr-1" />
+                Add Task
+              </Button>
+            </div>
+          );
+        } catch {
+          return <div className="text-red-500">Invalid checklist data</div>;
+        }
+
+      case BlockType.IMAGE:
+        return (
+          <div className="space-y-3">
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) handleImageBlockUpload(block.id, file);
+                }}
+                className="hidden"
+                id={`image-${block.id}`}
+              />
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => document.getElementById(`image-${block.id}`)?.click()}
+                disabled={uploadingImage === block.id}
+              >
+                {uploadingImage === block.id ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mr-2 h-4 w-4" />
+                    Choose Image
+                  </>
+                )}
+              </Button>
+            </div>
+            {block.content && (
+              <div className="relative">
+                <img src={block.content} alt="" className="h-24 rounded border" />
+                <Badge className="absolute top-1 right-1">Uploaded</Badge>
+              </div>
+            )}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label className="text-xs">Size</Label>
+                <Select
+                  value={block.metadata?.size || MediaSize.LARGE}
+                  onValueChange={(value: MediaSize) => updateBlockMetadata(block.id, { size: value as MediaSize })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={MediaSize.SMALL}>Small</SelectItem>
+                    <SelectItem value={MediaSize.MEDIUM}>Medium</SelectItem>
+                    <SelectItem value={MediaSize.LARGE}>Large</SelectItem>
+                    <SelectItem value={MediaSize.FULL}>Full</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label className="text-xs">Align</Label>
+                <Select
+                  value={block.metadata?.align || MediaAlign.CENTER}
+                  onValueChange={(value: MediaAlign) => updateBlockMetadata(block.id, { align: value as MediaAlign })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={MediaAlign.LEFT}>Left</SelectItem>
+                    <SelectItem value={MediaAlign.CENTER}>Center</SelectItem>
+                    <SelectItem value={MediaAlign.RIGHT}>Right</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <Input
+              placeholder="Caption"
+              value={block.metadata?.caption || ''}
+              onChange={(e) => updateBlockMetadata(block.id, { caption: e.target.value })}
+            />
+            <Input
+              placeholder="Alt text"
+              value={block.metadata?.alt || ''}
+              onChange={(e) => updateBlockMetadata(block.id, { alt: e.target.value })}
+            />
+          </div>
+        );
+
+      case BlockType.VIDEO:
+        return (
+          <div className="space-y-3">
+            <Input
+              placeholder="Video URL"
+              value={block.content}
+              onChange={(e) => updateBlock(block.id, { content: e.target.value })}
+            />
+            <div className="grid grid-cols-2 gap-2">
+              <Select
+                value={block.metadata?.size || MediaSize.FULL}
+                onValueChange={(value: MediaSize) => updateBlockMetadata(block.id, { size: value as MediaSize })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={MediaSize.SMALL}>Small</SelectItem>
+                  <SelectItem value={MediaSize.MEDIUM}>Medium</SelectItem>
+                  <SelectItem value={MediaSize.LARGE}>Large</SelectItem>
+                  <SelectItem value={MediaSize.FULL}>Full</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select
+                value={block.metadata?.align || MediaAlign.CENTER}
+                onValueChange={(value: MediaAlign) => updateBlockMetadata(block.id, { align: value as MediaAlign })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Align" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={MediaAlign.LEFT}>Left</SelectItem>
+                  <SelectItem value={MediaAlign.CENTER}>Center</SelectItem>
+                  <SelectItem value={MediaAlign.RIGHT}>Right</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <Textarea
+            placeholder={`Enter ${block.type.toLowerCase()} text...`}
+            value={block.content}
+            onChange={(e) => updateBlock(block.id, { content: e.target.value })}
+            rows={block.type === BlockType.PARAGRAPH ? 4 : 2}
+          />
+        );
     }
   };
 
@@ -441,7 +996,7 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
               </Card>
 
               {/* Content Blocks */}
-              <Card >
+              <Card>
                 <CardHeader>
                   <div className="flex justify-between items-center">
                     <div>
@@ -486,7 +1041,7 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                                   value={block.type}
                                   onValueChange={(value: BlockType) => updateBlock(block.id, { type: value as BlockType })}
                                 >
-                                  <SelectTrigger className="w-[150px]">
+                                  <SelectTrigger className="w-[180px]">
                                     <SelectValue />
                                   </SelectTrigger>
                                   <SelectContent>
@@ -495,6 +1050,10 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                                     <SelectItem value={BlockType.PARAGRAPH}>Paragraph</SelectItem>
                                     <SelectItem value={BlockType.IMAGE}>Image</SelectItem>
                                     <SelectItem value={BlockType.VIDEO}>Video</SelectItem>
+                                    <SelectItem value={BlockType.TABLE}>Table</SelectItem>
+                                    <SelectItem value={BlockType.ORDERED_LIST}>Numbered List</SelectItem>
+                                    <SelectItem value={BlockType.UNORDERED_LIST}>Bullet List</SelectItem>
+                                    <SelectItem value={BlockType.CHECKLIST}>Checklist</SelectItem>
                                   </SelectContent>
                                 </Select>
                                 <Badge variant="secondary">#{index + 1}</Badge>
@@ -508,137 +1067,7 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                                 <Trash2 className="h-4 w-4 text-red-600" />
                               </Button>
                             </div>
-
-                            {block.type === BlockType.IMAGE ? (
-                              <div className="space-y-3">
-                                <div>
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) => {
-                                      const file = e.target.files?.[0];
-                                      if (file) handleImageBlockUpload(block.id, file);
-                                    }}
-                                    className="hidden"
-                                    id={`image-${block.id}`}
-                                  />
-                                  <Button
-                                    type="button"
-                                    variant="outline"
-                                    size="sm"
-                                    onClick={() => document.getElementById(`image-${block.id}`)?.click()}
-                                    disabled={uploadingImage === block.id}
-                                  >
-                                    {uploadingImage === block.id ? (
-                                      <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                        Uploading...
-                                      </>
-                                    ) : (
-                                      <>
-                                        <Upload className="mr-2 h-4 w-4" />
-                                        Choose Image
-                                      </>
-                                    )}
-                                  </Button>
-                                </div>
-                                {block.content && (
-                                  <div className="relative">
-                                    <img src={block.content} alt="" className="h-24 rounded border" />
-                                    <Badge className="absolute top-1 right-1">Uploaded</Badge>
-                                  </div>
-                                )}
-                                <div className="grid grid-cols-2 gap-2">
-                                  <div>
-                                    <Label className="text-xs">Size</Label>
-                                    <Select
-                                      value={block.metadata?.size || MediaSize.LARGE}
-                                      onValueChange={(value: MediaSize) => updateBlockMetadata(block.id, { size: value as MediaSize })}
-                                    >
-                                      <SelectTrigger>
-                                        <SelectValue />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value={MediaSize.SMALL}>Small</SelectItem>
-                                        <SelectItem value={MediaSize.MEDIUM}>Medium</SelectItem>
-                                        <SelectItem value={MediaSize.LARGE}>Large</SelectItem>
-                                        <SelectItem value={MediaSize.FULL}>Full</SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </div>
-                                  <div>
-                                    <Label className="text-xs">Align</Label>
-                                    <Select
-                                      value={block.metadata?.align || MediaAlign.CENTER}
-                                      onValueChange={(value: MediaAlign) => updateBlockMetadata(block.id, { align: value as MediaAlign })}
-                                    >
-                                      <SelectTrigger>
-                                        <SelectValue />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value={MediaAlign.LEFT}>Left</SelectItem>
-                                        <SelectItem value={MediaAlign.CENTER}>Center</SelectItem>
-                                        <SelectItem value={MediaAlign.RIGHT}>Right</SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  </div>
-                                </div>
-                                <Input
-                                  placeholder="Caption"
-                                  value={block.metadata?.caption || ''}
-                                  onChange={(e: { target: { value: any; }; }) => updateBlockMetadata(block.id, { caption: e.target.value })}
-                                />
-                                <Input
-                                  placeholder="Alt text"
-                                  value={block.metadata?.alt || ''}
-                                  onChange={(e: { target: { value: any; }; }) => updateBlockMetadata(block.id, { alt: e.target.value })}
-                                />
-                              </div>
-                            ) : block.type === BlockType.VIDEO ? (
-                              <div className="space-y-3">
-                                <Input
-                                  placeholder="Video URL"
-                                  value={block.content}
-                                  onChange={(e: { target: { value: any; }; }) => updateBlock(block.id, { content: e.target.value })}
-                                />
-                                <div className="grid grid-cols-2 gap-2">
-                                  <Select
-                                    value={block.metadata?.size || MediaSize.FULL}
-                                    onValueChange={(value: MediaSize) => updateBlockMetadata(block.id, { size: value as MediaSize })}
-                                  >
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Size" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectItem value={MediaSize.SMALL}>Small</SelectItem>
-                                      <SelectItem value={MediaSize.MEDIUM}>Medium</SelectItem>
-                                      <SelectItem value={MediaSize.LARGE}>Large</SelectItem>
-                                      <SelectItem value={MediaSize.FULL}>Full</SelectItem>
-                                    </SelectContent>
-                                  </Select>
-                                  <Select
-                                    value={block.metadata?.align || MediaAlign.CENTER}
-                                    onValueChange={(value: MediaAlign) => updateBlockMetadata(block.id, { align: value as MediaAlign })}
-                                  >
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Align" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectItem value={MediaAlign.LEFT}>Left</SelectItem>
-                                      <SelectItem value={MediaAlign.CENTER}>Center</SelectItem>
-                                      <SelectItem value={MediaAlign.RIGHT}>Right</SelectItem>
-                                    </SelectContent>
-                                  </Select>
-                                </div>
-                              </div>
-                            ) : (
-                              <Textarea
-                                placeholder={`Enter ${block.type.toLowerCase()} text...`}
-                                value={block.content}
-                                onChange={(e: { target: { value: any; }; }) => updateBlock(block.id, { content: e.target.value })}
-                                rows={block.type === BlockType.PARAGRAPH ? 4 : 2}
-                              />
-                            )}
+                            {renderBlockEditor(block)}
                           </CardContent>
                         </Card>
                       ))}
@@ -652,8 +1081,8 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                 <Button type="button" variant="outline" onClick={() => router.back()}>
                   Cancel
                 </Button>
-                <Button type="submit" className="flex-1 w-[200px]" disabled={loading}>
-                  {loading ? (
+                <Button type="submit" className="flex-1 w-[200px]" disabled={loading || isSaving}>
+                  {(loading || isSaving) ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Saving...
@@ -686,11 +1115,9 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                         <div className="flex space-x-3 items-center gap-2 text-sm text-gray-600 mb-4">
                           <span>By {formData.author || 'Author'}</span>
                           {formData.published && (
-                            <Badge variant="secondary" className="gap-1 space-x-4">
-                              <CheckCircle2 className="h-[10px] w-[10px]" />
-                            <h1>
-                            Published
-                            </h1>
+                            <Badge variant="secondary" className="gap-1">
+                              <CheckCircle2 className="h-3 w-3" />
+                              Published
                             </Badge>
                           )}
                         </div>
@@ -722,12 +1149,12 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
 
       {/* Add Component Modal */}
       <Dialog open={showAddModal} onOpenChange={setShowAddModal}>
-        <DialogContent>
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Add Component</DialogTitle>
             <DialogDescription>Choose a component type to add to your article</DialogDescription>
           </DialogHeader>
-          <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
             {componentTypes.map(({ type, icon: Icon, label, desc }) => (
               <Button
                 key={type}
@@ -740,12 +1167,12 @@ export default function ArticleBuilder({ onSave, initialData, isEdit = false }: 
                   setTimeout(() => addBlock(), 10);
                 }}
               >
-                <Icon className="mr-3 h-5 w-5" />
+                <Icon className="mr-3 h-5 w-5 flex-shrink-0" />
                 <div className="text-left">
                   <div className="font-medium">{label}</div>
                   <div className="text-xs opacity-70">{desc}</div>
                 </div>
-                {selectedBlockType === type && <CheckCircle2 className="ml-auto h-5 w-5" />}
+                {selectedBlockType === type && <CheckCircle2 className="ml-auto h-5 w-5 flex-shrink-0" />}
               </Button>
             ))}
           </div>

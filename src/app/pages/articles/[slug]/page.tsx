@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
-import { revalidatePath } from "next/cache"
-import { useEffect } from "react"
-import authClient from "@/lib/clients/auth"
 import CommentForm from "@/components/comments/CommentForm"
+import ArticlePreviewComponent from "@/lib/components/article_preview"
 
 export const revalidate = 60; // seconds
 
@@ -64,15 +62,17 @@ function CommentList({ comments }: { comments: any[] }) {
   return (
     <div className="space-y-4 mt-6">
       {comments.map((comment) => (
-        <div key={comment.id} className="border rounded-lg p-3">
-          <p className="font-semibold">{comment.author}</p>
-          <p className="text-gray-700">{comment.content}</p>
-          <p className="text-xs text-gray-500 mt-1">
-            {new Date(comment.createdAt).toLocaleDateString()}
-          </p>
+        <div key={comment.id} className="border rounded-lg p-4 bg-gray-50">
+          <div className="flex items-start justify-between mb-2">
+            <p className="font-semibold text-gray-900">{comment.author}</p>
+            <p className="text-xs text-gray-500">
+              {new Date(comment.createdAt).toLocaleDateString()}
+            </p>
+          </div>
+          <p className="text-gray-700 leading-relaxed">{comment.content}</p>
 
           {comment.replies && comment.replies.length > 0 && (
-            <div className="ml-6 mt-3 border-l pl-4">
+            <div className="ml-6 mt-4 border-l-2 border-gray-300 pl-4">
               <CommentList comments={comment.replies} />
             </div>
           )}
@@ -109,83 +109,54 @@ export default async function ArticlePage({ params }: Props) {
     },
   })
 
-
   if (!article) return notFound()
 
-
+  // Transform article data for the preview component
+  const articleData = {
+    title: article.title,
+    author: article.author,
+    published: article.published,
+    thumbnail: article.thumbnail || undefined,
+    excerpt: article.excerpt || undefined,
+    blocks: article.blocks.map((block) => ({
+      id: block.id,
+      type: block.type as any,
+      content: block.content,
+      order: block.order,
+      metadata: block.metadata as any,
+    })),
+  }
 
   return (
-    <main className="p-6 prose mt-[80px] bg-white w-[100vw] mx-auto max-w-5xl">
-      {article.thumbnail && (
-        <img
-          src={article.thumbnail}
-          alt={article.title}
-          className="rounded-lg mb-6 w-full object-cover"
-        />
-      )}
+    <main className="min-h-screen  py-[90px]">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Article Content */}
+        <article className="bg-white rounded-xl shadow-sm p-8 mb-8">
+          <ArticlePreviewComponent
+            data={articleData}
+            showHeader={true}
+          />
+        </article>
 
-      <h1 className="text-4xl font-bold mb-2">{article.title}</h1>
-      <p className="text-gray-500 mb-6">
-        By <strong>{article.author}</strong> •{" "}
-        {new Date(article.createdAt).toLocaleDateString()}
-      </p>
+        {/* 🗨️ Comments Section */}
+        <section className="bg-white rounded-xl shadow-sm p-8">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900">Comments</h2>
 
-      {article.blocks.map((block) => {
-        switch (block.type) {
-          case "HEADING":
-            return (
-              <h2 key={block.id} className="text-2xl font-semibold mt-8">
-                {block.content}
-              </h2>
-            )
-          case "SUBHEADING":
-            return (
-              <h3 key={block.id} className="text-xl font-medium mt-6">
-                {block.content}
-              </h3>
-            )
-          case "PARAGRAPH":
-            return (
-              <p key={block.id} className="text-lg leading-relaxed">
-                {block.content}
-              </p>
-            )
-          case "IMAGE":
-            return (
-              <img
-                key={block.id}
-                src={block.content}
-                alt="Article image"
-                className="my-4 rounded-md"
-              />
-            )
-          case "VIDEO":
-            return (
-              <video
-                key={block.id}
-                controls
-                className="w-full rounded-md my-4"
-                src={block.content}
-              />
-            )
-          default:
-            return null
-        }
-      })}
+          {article.comments.length > 0 ? (
+            <CommentList comments={article.comments} />
+          ) : (
+            <p className="text-gray-500 text-center py-8">
+              No comments yet. Be the first to comment!
+            </p>
+          )}
 
-      {/* 🗨️ Comments Section */}
-      <section className="mt-16">
-        <h2 className="text-2xl font-bold mb-4">Comments</h2>
-
-        {article.comments.length > 0 ? (
-          <CommentList comments={article.comments} />
-        ) : (
-          <p className="text-gray-500">No comments yet.</p>
-        )}
-
-        {/* 💬 Comment Form */}
-        <CommentForm articleId={article.id} slug={slug} />
-      </section>
+          {/* 💬 Comment Form */}
+          <div className="mt-8 pt-8 border-t">
+            <h3 className="text-xl font-semibold mb-4">Leave a Comment</h3>
+            <CommentForm articleId={article.id} slug={slug} />
+          </div>
+        </section>
+      </div>
     </main>
   )
 }
