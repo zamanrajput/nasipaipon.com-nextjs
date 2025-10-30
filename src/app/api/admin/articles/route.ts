@@ -73,7 +73,3 @@ export async function POST(req: Request) {
 
 
 
-function uuidv4() {
-  throw new Error('Function not implemented.');
-}
-
