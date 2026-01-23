@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function EventPage() {
   return (
-    <main className="min-h-screen bg-[#1a1a1a] flex flex-col">
+    <main className="min-h-screen bg-[#1a1a1a] flex flex-col mt-[60px]">
       {/* Full Image Section */}
       <div className="relative w-full flex-1 flex items-center justify-center p-4">
         <div className="relative w-full max-w-lg mx-auto">
