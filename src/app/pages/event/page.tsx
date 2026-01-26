@@ -105,7 +105,7 @@ export default function EventPage() {
       <div className="sticky bottom-0 w-full bg-gradient-to-t from-[#0f0f0f] via-[#0f0f0f] to-transparent pt-8 pb-6 px-4">
         <div className="max-w-lg mx-auto space-y-4">
           {/* Updated CTA Button */}
-          <EventCtaButton label="ORDER NOW" />
+          <EventCtaButton  />
           <p className="text-center text-gray-400 text-sm">
             Ambil masa kurang 1 minit. Tempah awal, elak beratur panjang!
           </p>

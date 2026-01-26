@@ -14,30 +14,11 @@ function detectPlatform(): Platform {
   const userAgent = navigator.userAgent || navigator.vendor || ""
   const platform = navigator.platform || ""
 
-  // Check for iOS devices (iPhone, iPad, iPod)
-  if (/iPad|iPhone|iPod/.test(userAgent)) {
-    return "ios"
-  }
+  if (/iPad|iPhone|iPod/.test(userAgent)) return "ios"
+  if (platform.toLowerCase().includes("mac") || /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent)) return "ios"
+  if (/android/i.test(userAgent)) return "android"
+  if (/Win/.test(platform) || /Windows/.test(userAgent)) return "android"
 
-  // Check for macOS (Safari on Mac)
-  if (
-    platform.toLowerCase().includes("mac") ||
-    /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent)
-  ) {
-    return "ios"
-  }
-
-  // Android devices
-  if (/android/i.test(userAgent)) {
-    return "android"
-  }
-
-  // Windows devices
-  if (/Win/.test(platform) || /Windows/.test(userAgent)) {
-    return "android"
-  }
-
-  // Default to Play Store for all other platforms
   return "android"
 }
 
@@ -53,12 +34,8 @@ export function EventCtaButton() {
     window.open(link, "_blank", "noopener,noreferrer")
   }
 
-  const buttonText =
-    platform === "loading"
-      ? "DOWNLOAD APP"
-      : platform === "ios"
-        ? "DOWNLOAD DI APP STORE"
-        : "DOWNLOAD DI PLAY STORE"
+  // ✅ Always show "TEMPAH SEKARANG"
+  const buttonText = "TEMPAH SEKARANG"
 
   return (
     <button
