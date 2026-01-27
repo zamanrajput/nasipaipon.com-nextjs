@@ -2,13 +2,14 @@
 export const CONFIG = {
   // WhatsApp Configuration
   whatsapp: {
-    number: "+601155274797", // Format for WhatsApp API (no + symbol, no spaces or dashes)
+    number: "60115527479", // Format for WhatsApp API (no + symbol, no spaces or dashes)
     displayNumber: "+60 11-5527 4797", // Format for display
+    catalogUrl: "https://www.whatsapp.com/catalog/601155274797/?app_absent=0", // WhatsApp Catalog URL
   },
 
   // Google Form Configuration
   googleForm: {
-    url: "https://forms.gle/fAs7W6WVZEQDkejXA", // Replace with your actual Google Form URL
+    url: "https://forms.google.com/your-form-url-here", // Replace with your actual Google Form URL
   },
 
   // App Store URLs
@@ -51,9 +52,7 @@ _Please fill in the details above and send to place your order._`;
   return encodeURIComponent(message);
 };
 
-// WhatsApp Order URL Generator
+// WhatsApp Order URL Generator - Opens WhatsApp Catalog
 export const getWhatsAppOrderURL = () => {
-  const { number } = CONFIG.whatsapp;
-  const message = generateWhatsAppMessage();
-  return `https://wa.me/${number}?text=${message}`;
+  return CONFIG.whatsapp.catalogUrl;
 };
