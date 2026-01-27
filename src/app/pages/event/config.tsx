@@ -8,7 +8,7 @@ export const CONFIG = {
 
   // Google Form Configuration
   googleForm: {
-    url: "https://forms.google.com/your-form-url-here", // Replace with your actual Google Form URL
+    url: "https://forms.gle/fAs7W6WVZEQDkejXA", // Replace with your actual Google Form URL
   },
 
   // App Store URLs
