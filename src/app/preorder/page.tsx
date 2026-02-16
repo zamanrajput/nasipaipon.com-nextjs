@@ -12,7 +12,7 @@ export default function PreorderPage() {
         const targetId = target.getAttribute('href')
         if (targetId === '#') return
         
-        const targetElement = document.querySelector(targetId)
+        const targetElement = document.querySelector(targetId as string)
         if (targetElement) {
           window.scrollTo({ 
             top: (targetElement as HTMLElement).offsetTop - 80, 
