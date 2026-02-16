@@ -11,6 +11,7 @@ import {
   ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline"
 
+
 type Platform = "ios" | "android" | "unknown";
 
 function detectPlatform(): Platform {
