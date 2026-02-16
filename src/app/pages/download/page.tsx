@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../../assets/assets/logo (3).png";
 import app1 from "../../../../assets/assets/app/S2.png";
 import app2 from "../../../../assets/assets/app/S1.png";
@@ -8,8 +8,56 @@ import app4 from "../../../../assets/assets/app/s4.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=app.nasipaipon.kitchen&hl=ms";
+const APP_STORE_URL = "https://apps.apple.com/my/app/nasi-paipon/id6751135731";
+
+type Platform = "ios" | "android" | "unknown";
+
+function detectPlatform(): Platform {
+  if (typeof window === "undefined") return "unknown";
+
+  const userAgent = navigator.userAgent || navigator.vendor || "";
+  const platform = navigator.platform || "";
+
+  // Check for iOS devices (iPhone, iPad, iPod)
+  if (/iPhone|iPad|iPod/.test(userAgent)) {
+    return "ios";
+  }
+
+  // Check for macOS
+  if (/Mac/.test(platform) || /Macintosh/.test(userAgent)) {
+    return "ios";
+  }
+
+  // Check for Android
+  if (/Android/.test(userAgent)) {
+    return "android";
+  }
+
+  // Check for Windows - redirect to Play Store
+  if (/Win/.test(platform) || /Windows/.test(userAgent)) {
+    return "android";
+  }
+
+  // Default to Android/Play Store for unknown platforms
+  return "android";
+}
+
 const Page = () => {
   const router = useRouter();
+  const [platform, setPlatform] = useState<Platform>("unknown");
+
+  useEffect(() => {
+    setPlatform(detectPlatform());
+  }, []);
+
+  const handleDownload = () => {
+    const url = platform === "ios" ? APP_STORE_URL : PLAY_STORE_URL;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const buttonText = platform === "ios" ? "Download on App Store" : "Download on Play Store";
+
   return (
     <div className="bg-opacity-30 overflow-x-hidden">
 
@@ -18,9 +66,10 @@ const Page = () => {
           <h1 className="sm:text-4xl text-3xl text-pretty text-start font-bold">Welcome to Nasi Paipon! Your Go-To Food Ordering App for Large Gatherings</h1>
           <button
             type="button"
-            className="bg-red-600 w-fit sm:px-8 px-6 rounded-md sm:py-4 py-3 mx-auto text-3xl text-white"
+            onClick={handleDownload}
+            className="bg-red-600 hover:bg-red-700 transition-colors w-fit sm:px-8 px-6 rounded-md sm:py-4 py-3 mx-auto text-2xl sm:text-3xl text-white cursor-pointer"
           >
-            Download Now
+            {buttonText}
           </button>
           <div className="text-2xl text-opacity-70 text-pretty">
             <h1 className="text-3xl my-5">Quality Verified</h1>
@@ -32,7 +81,7 @@ const Page = () => {
         </div>
         <div className="sm:w-[45vw] w-[100vw] scale-150 sm:scale-100 sm:my-0 my-20">
           <img
-            src={app1.src}
+            src={app1.src || "/placeholder.svg"}
             alt="mobile img"
           />
         </div>
@@ -54,7 +103,7 @@ const Page = () => {
           Get all your party bookings now on Applications
         </div>
         <Image
-          src={app2}
+          src={app2 || "/placeholder.svg"}
           alt="photo1"
           className="h-[100%] sm:w-[35dvw] w-[100%] m-auto rounded-xl"
         />
@@ -66,7 +115,7 @@ const Page = () => {
         Find exactly what you need, where you need it with precise radius and location-based search.
         </div>
         <Image
-          src={app3}
+          src={app3 || "/placeholder.svg"}
           alt="photo1"
           className="h-[100%] sm:w-[35dvw] w-[100%] m-auto rounded-xl"
         />
@@ -78,7 +127,7 @@ const Page = () => {
         Review all order information and details. 
         </div>
         <Image
-          src={app4}
+          src={app4 || "/placeholder.svg"}
           alt="photo1"
           className="h-[100%] sm:w-[35dvw] w-[100%] m-auto rounded-xl"
         />
@@ -86,12 +135,12 @@ const Page = () => {
 
       <div className="sm:px-60 px-5 m-auto pb-20 backdrop-blur-md text-gray-300">
         <div className="py-16">
-          <Image src={logo} alt="logo" className="m-auto w-56 rounded-md drop-shadow-2xl" />
+          <Image src={logo || "/placeholder.svg"} alt="logo" className="m-auto w-56 rounded-md drop-shadow-2xl" />
         </div>
         <div className="text-center text-5xl font-bold mb-20 text-white">About Nasi Paipon</div>
         <div className="doc">
           {
-            "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it’s a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
+            "Nasi Paipon is the ultimate food ordering platform designed for those who need to place bulk orders from trusted Nasi Paipon vendors. Whether it's a wedding, birthday, office party, mosque gathering, or any special event, Nasi Paipon is here to make catering easier than ever."
           }
           <h1 className="text-xl mt-5 mb-2 font-bold text-white">Why Choose Nasi Paipon?</h1>
           {
@@ -99,11 +148,11 @@ const Page = () => {
           }
           <h1 className="text-xl mt-5 mb-2 font-bold text-white">Effortless Pickup with QR Code</h1>
           {
-            "Although Nasi Paipon doesn’t directly offer delivery services, we make pickups a breeze. After you place an order, you’ll receive a QR code that you can show to the vendor. Once the vendor scans your QR code, they can easily view the details of your order, ensuring a quick and accurate handover. You can choose to pick up the food yourself or arrange a delivery service to collect it."
+            "Although Nasi Paipon doesn't directly offer delivery services, we make pickups a breeze. After you place an order, you'll receive a QR code that you can show to the vendor. Once the vendor scans your QR code, they can easily view the details of your order, ensuring a quick and accurate handover. You can choose to pick up the food yourself or arrange a delivery service to collect it."
           }
           <h1 className="text-xl mt-5 mb-2 font-bold text-white">Unmatched Convenience for Big Events</h1>
           {
-            "There’s no platform like Nasi Paipon in the market today for placing bulk food orders. Now you can streamline your food ordering process for large events with a few taps."
+            "There's no platform like Nasi Paipon in the market today for placing bulk food orders. Now you can streamline your food ordering process for large events with a few taps."
           }
           <h1 className="text-xl mt-5 mb-2 font-bold text-white">{"Perfect for:"}</h1>
          <b> Anyone planning a large gathering:</b> weddings, birthdays, prayer

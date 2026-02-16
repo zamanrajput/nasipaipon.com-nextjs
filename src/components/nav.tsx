@@ -52,7 +52,7 @@ const TopNavBar = () => {
 
   const navItems: Array<MenuItemNav> = [
     { name: "HOME", url: "/" },
-    { name: "ARTICLES", url: "/pages/articles" },
+    { name: "EVENT", url: "/pages/event" },
     { name: "TIMINGS", url: "/pages/timing" },
     { name: "CONTACT", url: "/pages/contact" },
     { name: "ABOUT", url: "/pages/about" },
