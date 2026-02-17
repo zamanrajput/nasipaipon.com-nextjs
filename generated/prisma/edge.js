@@ -220,7 +220,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\generated\\prisma",
+      "value": "C:\\GitHub\\nasipaipon.com-nextjs\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -234,7 +234,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Rajpoot\\Desktop\\Nasi\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\GitHub\\nasipaipon.com-nextjs\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

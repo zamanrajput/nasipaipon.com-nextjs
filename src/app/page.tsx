@@ -55,7 +55,7 @@ const Page = () => {
 
       </div>
 
-      <div className="rev  flex flex-col w-screen sm:mt-28 mt-36">
+      {/* <div className="rev  flex flex-col w-screen sm:mt-28 mt-36">
         <div className=" flex  flex-col text-white items-center gap-12 sm:my-12">
           <h1 className="sm:text-6xl sm:font-bold text-3xl font-semibold">
             REVIEWS
@@ -225,9 +225,9 @@ const Page = () => {
             </div>
           </div>
         </Carousel>
-      </div>
+      </div> */}
 
-      <div className="flex sm:flex-row flex-col items-center justify-center gap-10 px-24 mt-10 w-screen py-10">
+      <div className="flex sm:flex-row flex-col items-center justify-center gap-10 px-24 mt-14 w-screen py-10">
         <div className="img rounded-xl sm:w-[30vw] w-[100vw] flex justify-center">
           <img
             height={500}
