@@ -3,23 +3,13 @@
 import logo from "../../../assets/assets/NASI PAIPON.png";
 import { useState, useEffect } from "react";
 import {
-  FiUser,
-  FiHome,
-  FiUsers,
   FiMapPin,
   FiClock,
   FiSmartphone,
   FiDownload,
   FiChevronUp,
-  FiShoppingCart,
 } from "react-icons/fi";
-import {
-  MdRestaurant,
-  MdDomain,
-  MdFastfood,
-  MdStorefront,
-} from "react-icons/md";
-import { GiMeat } from "react-icons/gi";
+import { MdStorefront } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 
 export default function PreorderPage() {
@@ -87,7 +77,7 @@ export default function PreorderPage() {
               href="#makanan"
               className="btn sm:mt-5 mt-6 px-6 py-3 rounded-lg font-semibold text-center hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 bg-white text-black flex items-center justify-center gap-2"
             >
-              <MdRestaurant size={20} /> LIHAT MENU
+              LIHAT MENU
             </a>
 
             <a
@@ -117,7 +107,8 @@ export default function PreorderPage() {
               {
                 title: "Individu & Profesional",
                 subtitle: "Yang Tiada Masa Masak",
-                icon: <FiUser size={32} />,
+                image: "/images/preorder/Picture1.png",
+                imageAlt: "Individu & Profesional",
                 items: [
                   "Bekerja sehingga waktu berbuka",
                   "Tinggal sendirian/bujang",
@@ -127,7 +118,8 @@ export default function PreorderPage() {
               {
                 title: "Keluarga & Rumah Tangga",
                 subtitle: "Yang Ingin Rehat Dari Dapur",
-                icon: <FiHome size={32} />,
+                image: "/images/preorder/Picture2.png",
+                imageAlt: "Keluarga & Rumah Tangga",
                 items: [
                   "Ingin berbuka tanpa stress masak",
                   "Nak rehat dari dapur sehari dua",
@@ -137,7 +129,8 @@ export default function PreorderPage() {
               {
                 title: "Komuniti & Organisasi",
                 subtitle: "Yang Urus Program Ramadan",
-                icon: <FiUsers size={32} />,
+                image: "/images/preorder/Picture3.png",
+                imageAlt: "Komuniti & Organisasi",
                 items: [
                   "AJK Masjid & Surau (program iftar)",
                   "Syarikat (buka puasa staff)",
@@ -147,28 +140,32 @@ export default function PreorderPage() {
             ].map((audience, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300"
               >
-                <div className="text-4xl mb-4 text-gray-600">
-                  {audience.icon}
+                <img
+                  src={audience.image}
+                  alt={audience.imageAlt}
+                  className="w-full h-44 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-black mb-2">
+                    {audience.title}
+                  </h3>
+                  <p className="text-gray-600 font-semibold mb-4">
+                    {audience.subtitle}
+                  </p>
+                  <ul className="space-y-2">
+                    {audience.items.map((item, i) => (
+                      <li
+                        key={i}
+                        className="text-gray-700 flex items-start gap-2"
+                      >
+                        <span className="text-gray-600 mt-1">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-xl font-bold text-black mb-2">
-                  {audience.title}
-                </h3>
-                <p className="text-gray-600 font-semibold mb-4">
-                  {audience.subtitle}
-                </p>
-                <ul className="space-y-2">
-                  {audience.items.map((item, i) => (
-                    <li
-                      key={i}
-                      className="text-gray-700 flex items-start gap-2"
-                    >
-                      <span className="text-gray-600 mt-1">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
@@ -191,7 +188,9 @@ export default function PreorderPage() {
               {
                 title: "Untuk Makan Seorang",
                 price: "RM 12.90 - RM 18.90",
-                icon: <MdFastfood size={40} />,
+                // TODO: Replace src with your own image path
+                image: "/images/preorder/Picture4.png",
+                imageAlt: "Nasi Paipon Seorang",
                 items: [
                   "Nasi Paipon Ayam",
                   "Nasi Paipon Kambing",
@@ -202,7 +201,9 @@ export default function PreorderPage() {
               {
                 title: "Untuk Buffet / Kenduri",
                 price: "RM 25 - RM 35 / Pax",
-                icon: <MdRestaurant size={40} />,
+                // TODO: Replace src with your own image path
+                image: "/images/preorder/Picture5.png",
+                imageAlt: "Buffet Kenduri",
                 items: [
                   "Nasi Paipon + 3 Lauk Pilihan",
                   "Nasi Paipon + 2 Lauk",
@@ -213,7 +214,9 @@ export default function PreorderPage() {
               {
                 title: "Untuk Masjid / Surau",
                 price: "Harga Istimewa",
-                icon: <MdDomain size={40} />,
+                // TODO: Replace src with your own image path
+                image: "/images/preorder/Picture6.png",
+                imageAlt: "Paket Masjid Surau",
                 items: [
                   "Paket Iftar Jamaah",
                   "Nasi + 2 Lauk Pilihan",
@@ -224,67 +227,81 @@ export default function PreorderPage() {
             ].map((menu, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300"
               >
-                <div className="text-5xl mb-4 text-gray-600">{menu.icon}</div>
-                <h3 className="text-xl font-bold text-black mb-2">
-                  {menu.title}
-                </h3>
-                <p className="text-gray-600 font-semibold mb-4">
-                  {menu.price}
-                </p>
-                <ul className="space-y-2 mb-6">
-                  {menu.items.map((item, i) => (
-                    <li
-                      key={i}
-                      className="text-gray-700 flex items-start gap-2"
-                    >
-                      <span className="text-gray-600 mt-1">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#install-app"
-                  onClick={handleCTAClick}
-                  className="btn w-full px-4 py-3 rounded-lg font-semibold text-center hover:bg-opacity-90 transition-all duration-300 bg-gray-600 text-white"
-                >
-                  BOOK SLOT & PICKUP
-                </a>
+                <img
+                  src={menu.image}
+                  alt={menu.imageAlt}
+                  className="w-full h-44 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-black mb-2">
+                    {menu.title}
+                  </h3>
+                  <p className="text-gray-600 font-semibold mb-4">
+                    {menu.price}
+                  </p>
+                  <ul className="space-y-2 mb-6">
+                    {menu.items.map((item, i) => (
+                      <li
+                        key={i}
+                        className="text-gray-700 flex items-start gap-2"
+                      >
+                        <span className="text-gray-600 mt-1">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#install-app"
+                    onClick={handleCTAClick}
+                    className="btn w-full px-4 py-3 rounded-lg font-semibold text-center hover:bg-opacity-90 transition-all duration-300 bg-gray-600 text-white"
+                  >
+                    BOOK SLOT & PICKUP
+                  </a>
+                </div>
               </div>
             ))}
           </div>
 
           {/* SPECIAL LAMB SHANK */}
-          <div className="bg-white rounded-xl p-8 border-2 border-gray-300">
-            <h2 className="text-3xl font-bold text-black mb-4 flex items-center gap-2">
-              <FaStar size={28} className="text-gray-600" /> Special Ramadan:
-              Lamb Shank
-            </h2>
-            <p className="text-gray-600 text-lg font-semibold mb-4">
-              Daging kambing lembut dengan kuah spesial rahsia keluarga
-            </p>
-            <p className="text-gray-700 mb-6">
-              Lamb shank kami dimasak slow cooking dengan rempah ratus pilihan,
-              hasilnya daging yang sangat lembut dan berperisa.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              <div className="bg-gray-100 px-4 py-2 rounded">
-                <strong className="text-black">Seorang:</strong>{" "}
-                <span className="text-gray-600">RM 45.00</span>
+          <div className="bg-white rounded-xl overflow-hidden border-2 border-gray-300">
+            {/* TODO: Replace src with your own Lamb Shank image path */}
+            <img
+              src="/images/preorder/Picture7.png"
+              alt="Special Lamb Shank"
+              className="w-full h-64 object-cover"
+            />
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-black mb-4 flex items-center gap-2">
+                <FaStar size={28} className="text-gray-600" /> Special Ramadan:
+                Lamb Shank
+              </h2>
+              <p className="text-gray-600 text-lg font-semibold mb-4">
+                Daging kambing lembut dengan kuah spesial rahsia keluarga
+              </p>
+              <p className="text-gray-700 mb-6">
+                Lamb shank kami dimasak slow cooking dengan rempah ratus
+                pilihan, hasilnya daging yang sangat lembut dan berperisa.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <div className="bg-gray-100 px-4 py-2 rounded">
+                  <strong className="text-black">Seorang:</strong>{" "}
+                  <span className="text-gray-600">RM 45.00</span>
+                </div>
+                <div className="bg-gray-100 px-4 py-2 rounded">
+                  <strong className="text-black">Buffet:</strong>{" "}
+                  <span className="text-gray-600">RM 38.90 / pax</span>
+                </div>
               </div>
-              <div className="bg-gray-100 px-4 py-2 rounded">
-                <strong className="text-black">Buffet:</strong>{" "}
-                <span className="text-gray-600">RM 38.90 / pax</span>
-              </div>
+              <a
+                href="#install-app"
+                onClick={handleCTAClick}
+                className="btn px-6 py-3 rounded-lg font-semibold text-center hover:bg-opacity-90 transition-all duration-300 bg-gray-600 text-white inline-flex items-center gap-2"
+              >
+                BOOK SLOT & PICKUP (SHAH ALAM)
+              </a>
             </div>
-            <a
-              href="#install-app"
-              onClick={handleCTAClick}
-              className="btn px-6 py-3 rounded-lg font-semibold text-center hover:bg-opacity-90 transition-all duration-300 bg-gray-600 text-white inline-flex items-center gap-2"
-            >
-              <GiMeat size={20} /> BOOK SLOT & PICKUP (SHAH ALAM)
-            </a>
           </div>
         </div>
       </section>
@@ -496,11 +513,7 @@ export default function PreorderPage() {
                 key={idx}
                 className="bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-gray-300"
               >
-                <h3
-                  className="text-lg 
-                
-                font-bold text-black mb-3"
-                >
+                <h3 className="text-lg font-bold text-black mb-3">
                   <span className="text-gray-600 mr-2">Q:</span> {faq.q}
                 </h3>
                 <p className="text-gray-700 ml-6">
