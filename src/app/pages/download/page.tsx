@@ -167,7 +167,7 @@ const Page = () => {
         </div>
         <div onClick={()=>router.push('/pages/download')} className="opacity-80">Privacy Policy</div>
         <div className="opacity-80">
-          Powered by Revolution Software Pakistan
+          Powered by Paipon Tech
         </div>
       </div>
     </div>

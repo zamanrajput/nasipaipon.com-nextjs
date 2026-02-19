@@ -19,7 +19,7 @@ export default function AppFooter() {
       </div>
 
       <div className="opacity-80">
-        Powered by <span className="font-semibold"><a href="https://corelogicsolutions.pk">CoreLogic Solutions</a></span>
+        Powered by <span className="font-semibold"><a href="https://tech.nasipaipon.com">Paipon Tech</a></span>
       </div>
     </footer>
   );
