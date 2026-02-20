@@ -37,7 +37,7 @@ const links: LinkItem[] = [
     icon: <Laptop size={26} />,
     label: "Nasi Paipon Tech",
     sublabel: "Apps & System Development",
-    href: "https://tech.nasipaipon.com/",
+    href: "https://tech.nasipaipon.com/#contact",
     eventName: "click_tech",
   },
 ];
