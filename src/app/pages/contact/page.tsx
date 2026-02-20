@@ -8,23 +8,18 @@ const Page = () => {
   return (
     <div className="overflow-x-hidden">
       <div className="w-screen backdrop-blur-sm text-white py-10 sm:pt-20 pt-28">
-        
         <div className="text-5xl font-bold text-shadow-custom2 text-center my-10">
           CONTACT US
         </div>
 
         <div className="flex sm:flex-row flex-col gap-14 justify-center my-16">
-
           {/* Contact Methods */}
           <div className="sm:w-[35vw] w-[100vw] px-6 sm:px-0 text-center sm:text-start">
-            
-            <h1 className="text-2xl font-semibold mb-6">
-              Get in Touch
-            </h1>
+            <h1 className="text-2xl font-semibold mb-6">Get in Touch</h1>
 
             <p className="opacity-80 mb-10">
-              Have questions, catering requests, or business inquiries?
-              Reach out to us directly via WhatsApp or email.
+              Have questions, catering requests, or business inquiries? Reach
+              out to us directly via WhatsApp or email.
             </p>
 
             {/* WhatsApp */}
@@ -53,7 +48,6 @@ const Page = () => {
 
           {/* Address Section */}
           <div className="side sm:w-[35vw] w-[100vw] sm:text-start px-5 sm:px-0 text-center">
-            
             <h1 className="text-2xl font-semibold mb-6">Our Locations</h1>
 
             <p className="text-lg">Sales Stall</p>
@@ -68,12 +62,13 @@ const Page = () => {
               View on Map
             </a>
 
-            <br /><br />
+            <br />
+            <br />
 
             <p className="text-lg">Central Kitchen</p>
             <p className="opacity-80">
-              NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG,
-              68000 AMPANG, SELANGOR
+              NO 6 JALAN WAWASAN CAMPURAN, BANDAR BARU AMPANG, 68000 AMPANG,
+              SELANGOR
             </p>
             <a
               className="text-blue-500 underline cursor-pointer"
@@ -82,7 +77,6 @@ const Page = () => {
             >
               View on Map
             </a>
-
           </div>
         </div>
       </div>
